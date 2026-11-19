@@ -30,7 +30,7 @@ const demoQualityIcons = [
 const copy = {
   en: {
     skip: "Skip to content",
-    nav: { presentation: "Presentation", architecture: "Architecture", bananaNavy: "Banana Navy", navigation: "Main navigation", home: "Zaventem Voice, home", openMenu: "Open menu", closeMenu: "Close menu", language: "Page language" },
+    nav: { presentation: "Presentation", bananaNavy: "Banana Navy", navigation: "Main navigation", home: "Zaventem Voice, home", openMenu: "Open menu", closeMenu: "Close menu", language: "Page language" },
     hero: {
       title: ["Your airport", "A voice to guide", "your journey"],
       subtitle: "Ask about your flight, baggage or airport services. Simply speak. We’ll help you find your way.",
@@ -109,7 +109,7 @@ const copy = {
   },
   nl: {
     skip: "Ga naar de inhoud",
-    nav: { presentation: "Presentatie", architecture: "Architectuur", bananaNavy: "Banana Navy", navigation: "Hoofdnavigatie", home: "Zaventem Voice, startpagina", openMenu: "Menu openen", closeMenu: "Menu sluiten", language: "Taal van de pagina" },
+    nav: { presentation: "Presentatie", bananaNavy: "Banana Navy", navigation: "Hoofdnavigatie", home: "Zaventem Voice, startpagina", openMenu: "Menu openen", closeMenu: "Menu sluiten", language: "Taal van de pagina" },
     hero: {
       title: ["Uw luchthaven", "Een stem als gids", "op uw reis"],
       subtitle: "Vraag naar uw vlucht, bagage of de diensten op de luchthaven. Spreek gewoon. Wij helpen u de juiste weg te vinden.",
@@ -188,7 +188,7 @@ const copy = {
   },
   fr: {
     skip: "Aller au contenu",
-    nav: { presentation: "Présentation", architecture: "Architecture", bananaNavy: "Banana Navy", navigation: "Navigation principale", home: "Zaventem Voice, accueil", openMenu: "Ouvrir le menu", closeMenu: "Fermer le menu", language: "Langue de la page" },
+    nav: { presentation: "Présentation", bananaNavy: "Banana Navy", navigation: "Navigation principale", home: "Zaventem Voice, accueil", openMenu: "Ouvrir le menu", closeMenu: "Fermer le menu", language: "Langue de la page" },
     hero: {
       title: ["Votre aéroport", "Une voix qui guide", "votre voyage"],
       subtitle: "Demandez des informations sur votre vol, vos bagages ou les services de l’aéroport. Parlez simplement. Nous vous aidons à trouver votre chemin.",
@@ -404,7 +404,7 @@ export default function HomePage() {
               </div>
               <div className="control-layers">
                 {content.control.layers.map(([title, text], index) => (
-                  <article data-bento className="control-layer reveal" key={title}><span className="bento-glow" aria-hidden="true" /><span className="control-layer-number">0{index + 1}</span><div><h3>{title}</h3><p>{text}</p></div></article>
+                  <article data-scroll-fill-row className={`control-layer control-layer-${(index % 3) + 1} reveal`} key={title}><div><h3>{title}</h3><p>{text}</p></div></article>
                 ))}
               </div>
             </div>

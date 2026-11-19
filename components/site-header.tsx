@@ -7,12 +7,11 @@ import { VoicebotTrigger } from "@/components/voicebot-modal";
 export type SiteLanguage = "en" | "nl" | "fr";
 
 type SiteHeaderProps = {
-  active?: "home" | "architecture" | "banana-navy";
+  active?: "home" | "banana-navy";
   language?: SiteLanguage;
   onLanguageChange?: (language: SiteLanguage) => void;
   homeLabels?: {
     presentation: string;
-    architecture: string;
     bananaNavy: string;
     navigation: string;
     home: string;
@@ -62,7 +61,6 @@ export function SiteHeader({ active, language = "fr", onLanguageChange, homeLabe
           {active === "home" ? (
             <>
               <Link className="active" href="/#usages" onClick={() => setOpen(false)}>{homeLabels?.presentation ?? "Présentation"}</Link>
-              <Link href="/architecture" onClick={() => setOpen(false)}>{homeLabels?.architecture ?? "Architecture"}</Link>
               <Link href="/banana-navy" onClick={() => setOpen(false)}>{homeLabels?.bananaNavy ?? "Banana Navy"}</Link>
               <div className="site-language-switch" role="group" aria-label={homeLabels?.language ?? "Langue de la page"}>
                 {(["en", "nl", "fr"] as SiteLanguage[]).map((locale) => (
@@ -81,7 +79,6 @@ export function SiteHeader({ active, language = "fr", onLanguageChange, homeLabe
             <>
               <Link href="/" onClick={() => setOpen(false)}>Concept</Link>
               <Link href="/#usages" onClick={() => setOpen(false)}>Usages</Link>
-              <Link className={active === "architecture" ? "active" : ""} href="/architecture" onClick={() => setOpen(false)}>Architecture</Link>
               <Link className={active === "banana-navy" ? "active" : ""} href="/banana-navy" onClick={() => setOpen(false)}>Banana Navy</Link>
               <Link href="/#strike-it" onClick={() => setOpen(false)}>STRIKE IT</Link>
               <VoicebotTrigger className="nav-cta" onClick={() => setOpen(false)}>DÉMO LIVE <span>↗</span></VoicebotTrigger>

@@ -59,7 +59,6 @@ export function SiteFooter({ language = "fr" }: { language?: SiteLanguage }) {
         </div>
         <div className="footer-links">
           <p className="footer-label">{copy.explore}</p>
-          <Link href="/architecture">Architecture</Link>
           <Link href="/banana-navy">Banana Navy</Link>
           <Link href="/confidentialite">{copy.privacy}</Link>
           <Link href="/mentions-legales">{copy.legal}</Link>

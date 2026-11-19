@@ -12,6 +12,7 @@ export function LandingMotion() {
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
     const revealNodes = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
     const titleNodes = Array.from(document.querySelectorAll<HTMLElement>("[data-scroll-title]"));
+    const fillNodes = Array.from(document.querySelectorAll<HTMLElement>("[data-scroll-fill-row]"));
     const bentoNodes = Array.from(document.querySelectorAll<HTMLElement>("[data-bento]"));
 
     let revealObserver: IntersectionObserver | undefined;
@@ -40,6 +41,13 @@ export function LandingMotion() {
         const bounds = node.getBoundingClientRect();
         const progress = clamp((viewport * 0.88 - bounds.top) / (viewport * 0.58 + bounds.height));
         node.style.setProperty("--title-fill", `${Math.round(progress * 100)}%`);
+      });
+      fillNodes.forEach((node) => {
+        const bounds = node.getBoundingClientRect();
+        const progress = reduceMotion.matches
+          ? Number(bounds.top < viewport)
+          : clamp((viewport * 0.9 - bounds.top) / (viewport * 0.62));
+        node.style.setProperty("--scroll-fill", progress.toFixed(3));
       });
     };
 
