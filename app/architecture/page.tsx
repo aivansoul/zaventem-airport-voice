@@ -52,7 +52,7 @@ export default function ArchitecturePage() {
         <section className="subhero section-pad">
           <div className="shell subhero-grid">
             <div>
-              <h1>Une voix simple.<br /><em>Une discipline solide.</em></h1>
+              <h1>Une voix simple<br /><em>Une discipline solide</em></h1>
               <p>Le parcours a été conçu pour que la technologie reste invisible, que les sources restent traçables et que les données opérationnelles ne soient jamais simulées.</p>
             </div>
             <VisualPlaceholder className="subhero-visual gradient-mix" label="Schéma visuel à intégrer" />
@@ -62,7 +62,7 @@ export default function ArchitecturePage() {
         <section className="architecture-flow section-pad">
           <div className="shell">
             <div className="section-heading split-heading">
-              <div><h2>Quatre couches,<br />une seule expérience.</h2></div>
+              <div><h2>Quatre couches,<br />une seule expérience</h2></div>
               <p>Chaque couche a un rôle limité. Cette séparation permet de faire évoluer la voix, le contenu et les intégrations sans brouiller la responsabilité de chacun.</p>
             </div>
             <div className="architecture-layers">
@@ -79,7 +79,7 @@ export default function ArchitecturePage() {
         <section className="system-map section-pad">
           <div className="shell">
             <div className="section-heading centered-heading light-heading">
-              <h2>Ce qui est démontré aujourd’hui.</h2>
+              <h2>Ce qui est démontré aujourd’hui</h2>
               <p>Le prototype sépare volontairement la connaissance éditoriale d’une éventuelle couche opérationnelle future.</p>
             </div>
             <div className="system-flow" aria-label="Flux de l’architecture proposée">
@@ -102,7 +102,7 @@ export default function ArchitecturePage() {
 
         <section className="principles section-pad">
           <div className="shell principles-grid">
-            <div><h2>La confiance n’est pas une option de configuration.</h2></div>
+            <div><h2>La confiance n’est pas une option de configuration</h2></div>
             <div className="principle-list">
               <article><b>01</b><div><h3>Pas de fausse donnée live</h3><p>Une donnée opérationnelle sans accès autorisé reste explicitement hors périmètre.</p></div></article>
               <article><b>02</b><div><h3>Une provenance visible</h3><p>Chaque bloc de connaissance conserve son origine et sa date de vérification.</p></div></article>
@@ -112,7 +112,7 @@ export default function ArchitecturePage() {
           </div>
         </section>
 
-        <section className="page-cta"><div className="shell"><div><h2>La technique doit se faire oublier.</h2></div><div><VoicebotTrigger className="button button-white">Tester la conversation</VoicebotTrigger><Link className="text-link light-link" href="/banana-navy">Découvrir Banana Navy <span>→</span></Link></div></div></section>
+        <section className="page-cta"><div className="shell"><div><h2>La technique doit se faire oublier</h2></div><div><VoicebotTrigger className="button button-white">Tester la conversation</VoicebotTrigger><Link className="text-link light-link" href="/banana-navy">Découvrir Banana Navy <span>→</span></Link></div></div></section>
       </main>
       <SiteFooter />
     </>

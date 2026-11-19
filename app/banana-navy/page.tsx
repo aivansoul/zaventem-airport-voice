@@ -80,7 +80,7 @@ export default function BananaNavyPage() {
                 width="400"
                 height="238"
               />
-              <h1>DES VOICEBOTS<br /><span>QUI RESTENT FIABLES.</span></h1>
+              <h1>DES VOICEBOTS<br /><span>QUI RESTENT FIABLES</span></h1>
               <p>Banana Navy est un studio belge d’ingénierie et d’IA. Nous construisons des agents vocaux et des systèmes multi-agents pour les entreprises dont chaque réponse doit être claire, exacte et actionnable.</p>
               <div className="banana-hero-actions">
                 <a className="button button-primary" href="https://banana-navy.ai/fr/" target="_blank" rel="noreferrer">Découvrir Banana Navy <span aria-hidden="true">↗</span></a>
@@ -93,7 +93,7 @@ export default function BananaNavyPage() {
               <span className="bento-glow" aria-hidden="true" />
               <div className="banana-control-head" data-bento-layer>
                 <span className="banana-control-orb" aria-hidden="true"><i /></span>
-                <h2>Votre voix.<br />Vos règles.</h2>
+                <h2>Votre voix<br />Vos règles</h2>
               </div>
               <div className="banana-control-list">
                 {controlPoints.map(([label, value]) => (
@@ -107,7 +107,7 @@ export default function BananaNavyPage() {
         <section className="banana-capabilities section-pad">
           <div className="shell">
             <div className="section-heading split-heading reveal">
-              <div><h2>PLUS QU’UNE VOIX.</h2></div>
+              <div><h2>PLUS QU’UNE VOIX</h2></div>
               <p>Un voicebot fiable n’est pas un simple prompt avec une belle voix. C’est un système complet, relié aux bons outils, encadré par des règles métier et conçu pour savoir quand passer la main.</p>
             </div>
             <div className="banana-capability-grid">
@@ -126,7 +126,7 @@ export default function BananaNavyPage() {
         <section className="banana-critical section-pad">
           <div className="shell banana-critical-grid">
             <div className="banana-critical-copy reveal">
-              <h2>QUAND CHAQUE<br />MOT COMPTE.</h2>
+              <h2>QUAND CHAQUE<br />MOT COMPTE</h2>
               <p>Nous concevons pour les environnements sensibles et exigeants. Le système doit rester utile sous pression, fonctionner en plusieurs langues et rendre ses limites visibles à l’opérateur comme à l’appelant.</p>
               <a className="text-link light-link" href="https://banana-navy.ai/fr/voice-agents/" target="_blank" rel="noreferrer">Voir notre approche des agents vocaux <span>↗</span></a>
             </div>
@@ -141,7 +141,7 @@ export default function BananaNavyPage() {
         <section className="banana-process section-pad">
           <div className="shell">
             <div className="section-heading split-heading reveal">
-              <div><h2>DU PREMIER APPEL<br />À LA PRODUCTION.</h2></div>
+              <div><h2>DU PREMIER APPEL<br />À LA PRODUCTION</h2></div>
               <p>Banana Navy accompagne le cycle complet. L’expérience vocale, l’architecture, la sécurité, les intégrations et l’amélioration continue avancent ensemble.</p>
             </div>
             <div className="banana-process-grid">
@@ -160,7 +160,7 @@ export default function BananaNavyPage() {
         <section className="banana-proof section-pad">
           <div className="shell banana-proof-grid">
             <div className="reveal">
-              <h2>UNE ÉQUIPE<br />QUI CONSTRUIT.</h2>
+              <h2>UNE ÉQUIPE<br />QUI CONSTRUIT</h2>
               <p>Ingénierie IA, développement logiciel, design conversationnel et intégration système sont réunis dans la même équipe. Cette continuité évite qu’une promesse commerciale se perde entre un prototype et la réalité opérationnelle.</p>
             </div>
             <article data-bento className="banana-proof-card reveal">
@@ -174,7 +174,7 @@ export default function BananaNavyPage() {
 
         <section className="page-cta banana-page-cta">
           <div className="shell">
-            <div><h2>Votre communication mérite mieux qu’une réponse plausible.</h2></div>
+            <div><h2>Votre communication mérite mieux qu’une réponse plausible</h2></div>
             <div className="banana-page-cta-actions">
               <a className="button button-white" href="https://banana-navy.ai/fr/" target="_blank" rel="noreferrer">Visiter banana-navy.ai <span aria-hidden="true">↗</span></a>
               <a className="text-link light-link" href="tel:+32495277044">Let&apos;s Talk · +32 495 27 70 44</a>

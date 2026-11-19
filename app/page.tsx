@@ -32,7 +32,7 @@ const copy = {
     skip: "Skip to content",
     nav: { presentation: "Presentation", architecture: "Architecture", bananaNavy: "Banana Navy", navigation: "Main navigation", home: "Zaventem Voice, home", openMenu: "Open menu", closeMenu: "Close menu", language: "Page language" },
     hero: {
-      title: ["The airport answers you.", "Out loud."],
+      title: ["The airport answers you", "Out loud"],
       subtitle: "A trilingual voice assistant that guides you, simply.",
       test: "Try the voicebot",
       how: "How it works",
@@ -46,7 +46,7 @@ const copy = {
       ],
     },
     questions: {
-      heading: ["THE QUESTIONS", "THAT MATTER."],
+      heading: ["THE QUESTIONS", "THAT MATTER"],
       intro: "The voicebot covers the recurring moments of a journey while clearly separating stable guidance from information that can change by the minute.",
       needs: [
         ["Flights and wayfinding", "Find out where to check a departure, arrival, check-in desk or gate, without presenting time-sensitive information as certain.", "Official channels remain the source of truth at that moment", "Airplane"],
@@ -58,7 +58,7 @@ const copy = {
       ],
     },
     demo: {
-      heading: ["ASK A REAL", "QUESTION."],
+      heading: ["ASK A REAL", "QUESTION"],
       lead: "Ask how to reach the airport by train, where to report lost baggage or how to prepare your liquids. Speak naturally in English, Dutch or French.",
       test: "Try the voicebot",
       limit: "Independent prototype · no real-time operational data",
@@ -77,12 +77,13 @@ const copy = {
       ],
     },
     control: {
-      heading: ["FIVE LAYERS,", "ONE CONTROL MODEL."],
+      heading: ["FIVE LAYERS,", "ONE CONTROL MODEL"],
       intro: [
         "Every system is tailored to the company’s processes, tools and risk level. Scope, guardrails, performance targets and support are defined before deployment, then documented, tested and monitored.",
         "Security, human oversight and operational resilience are built in from the outset, with controls aligned with applicable GDPR, AI Act and DORA requirements.",
       ],
       visual: ["VOICEBOT", "CONTROLLED ARCHITECTURE"],
+      test: "Try the voicebot",
       layers: [
         ["Voice layer", "Natural conversations by phone, in the browser or at a kiosk. The voice layer supports low latency, interruptions and language changes within the same conversation."],
         ["Orchestrator", "The primary agent maintains context, identifies intent and passes the full context to the right destination. Defined workflows keep every answer within scope."],
@@ -99,7 +100,7 @@ const copy = {
       aria: "STRIKE IT programme context for the Banana Navy project",
     },
     final: {
-      heading: ["ONE QUESTION.", "ONE VOICE.", "THE RIGHT DIRECTION."],
+      heading: ["ONE QUESTION", "ONE VOICE", "THE RIGHT DIRECTION"],
       text: "A conversation is still the best test. Ask a simple question, listen to the answer, then challenge the prototype.",
       button: "Talk to the prototype",
     },
@@ -108,7 +109,7 @@ const copy = {
     skip: "Ga naar de inhoud",
     nav: { presentation: "Presentatie", architecture: "Architectuur", bananaNavy: "Banana Navy", navigation: "Hoofdnavigatie", home: "Zaventem Voice, startpagina", openMenu: "Menu openen", closeMenu: "Menu sluiten", language: "Taal van de pagina" },
     hero: {
-      title: ["De luchthaven geeft u antwoord.", "Hardop."],
+      title: ["De luchthaven geeft u antwoord", "Hardop"],
       subtitle: "Een drietalige voicebot die u eenvoudig op weg helpt.",
       test: "Probeer de voicebot",
       how: "Zo werkt het",
@@ -122,7 +123,7 @@ const copy = {
       ],
     },
     questions: {
-      heading: ["DE VRAGEN DIE", "ERTOE DOEN."],
+      heading: ["DE VRAGEN DIE", "ERTOE DOEN"],
       intro: "De voicebot helpt bij de terugkerende momenten van een reis en maakt duidelijk onderscheid tussen vaste richtlijnen en informatie die van minuut tot minuut kan veranderen.",
       needs: [
         ["Vluchten en wegwijs op de luchthaven", "Ontdek waar u een vertrek, aankomst, incheckbalie of gate controleert, zonder tijdsgevoelige informatie als zekerheid voor te stellen.", "De officiële kanalen blijven op dat moment de referentie", "Vliegtuig"],
@@ -134,7 +135,7 @@ const copy = {
       ],
     },
     demo: {
-      heading: ["STEL EEN ECHTE", "VRAAG."],
+      heading: ["STEL EEN ECHTE", "VRAAG"],
       lead: "Vraag hoe u met de trein naar de luchthaven reist, waar u verloren bagage meldt of hoe u vloeistoffen voorbereidt. Spreek natuurlijk in het Nederlands, Frans of Engels.",
       test: "Probeer de voicebot",
       limit: "Onafhankelijk prototype · geen operationele gegevens in realtime",
@@ -153,12 +154,13 @@ const copy = {
       ],
     },
     control: {
-      heading: ["VIJF LAGEN,", "ÉÉN CONTROLEMODEL."],
+      heading: ["VIJF LAGEN,", "ÉÉN CONTROLEMODEL"],
       intro: [
         "Elk systeem wordt afgestemd op de processen, tools en het risiconiveau van de onderneming. De scope, guardrails, prestatiedoelstellingen en ondersteuning worden vóór de ingebruikname vastgelegd en vervolgens gedocumenteerd, getest en opgevolgd.",
         "Beveiliging, menselijk toezicht en operationele veerkracht zijn van bij het ontwerp ingebouwd, met controles die zijn afgestemd op de toepasselijke vereisten van de GDPR, de AI Act en DORA.",
       ],
       visual: ["VOICEBOT", "ARCHITECTUUR ONDER CONTROLE"],
+      test: "Probeer de voicebot",
       layers: [
         ["Spraaklaag", "Natuurlijke gesprekken via telefoon, browser of kiosk. De spraaklaag zorgt voor lage latentie en kan omgaan met onderbrekingen en taalwissels binnen hetzelfde gesprek."],
         ["Orchestrator", "De hoofdagent bewaakt de rode draad, herkent de intentie en geeft de volledige context door aan de juiste schakel. Vooraf bepaalde workflows houden elk antwoord binnen de afgesproken scope."],
@@ -175,7 +177,7 @@ const copy = {
       aria: "Context van het STRIKE IT-programma voor het Banana Navy-project",
     },
     final: {
-      heading: ["ÉÉN VRAAG.", "ÉÉN STEM.", "DE JUISTE RICHTING."],
+      heading: ["ÉÉN VRAAG", "ÉÉN STEM", "DE JUISTE RICHTING"],
       text: "Een gesprek blijft de beste test. Stel een eenvoudige vraag, beluister het antwoord en daag het prototype daarna uit.",
       button: "Praat met het prototype",
     },
@@ -184,7 +186,7 @@ const copy = {
     skip: "Aller au contenu",
     nav: { presentation: "Présentation", architecture: "Architecture", bananaNavy: "Banana Navy", navigation: "Navigation principale", home: "Zaventem Voice, accueil", openMenu: "Ouvrir le menu", closeMenu: "Fermer le menu", language: "Langue de la page" },
     hero: {
-      title: ["L’aéroport vous répond.", "À voix haute."],
+      title: ["L’aéroport vous répond", "À voix haute"],
       subtitle: "Un accueil vocal trilingue pour vous guider, simplement.",
       test: "Tester le voicebot",
       how: "Comment ça marche",
@@ -198,7 +200,7 @@ const copy = {
       ],
     },
     questions: {
-      heading: ["LES QUESTIONS", "QUI COMPTENT."],
+      heading: ["LES QUESTIONS", "QUI COMPTENT"],
       intro: "Le voicebot couvre les moments récurrents du voyage tout en séparant clairement une règle durable d’une information qui peut changer à la minute.",
       needs: [
         ["Vols et parcours", "Comprendre où vérifier un départ, une arrivée, un comptoir ou une porte, sans présenter une donnée périssable comme une certitude.", "Le canal officiel reste la référence du moment", "Avion"],
@@ -210,7 +212,7 @@ const copy = {
       ],
     },
     demo: {
-      heading: ["POSEZ UNE", "VRAIE QUESTION."],
+      heading: ["POSEZ UNE", "VRAIE QUESTION"],
       lead: "Demandez comment venir en train, où signaler un bagage perdu ou comment préparer les liquides. Parlez naturellement, en français, néerlandais ou anglais.",
       test: "Tester le voicebot",
       limit: "Prototype indépendant · aucune donnée opérationnelle en temps réel",
@@ -229,12 +231,13 @@ const copy = {
       ],
     },
     control: {
-      heading: ["CINQ COUCHES,", "UN SEUL MODÈLE", "DE CONTRÔLE."],
+      heading: ["CINQ COUCHES,", "UN SEUL MODÈLE", "DE CONTRÔLE"],
       intro: [
         "Chaque système est adapté aux processus, aux outils et au niveau de risque de l’entreprise. Le périmètre, les garde-fous, les objectifs de performance et le support sont définis avant le déploiement, puis documentés, testés et surveillés.",
         "La sécurité, la supervision humaine et la résilience opérationnelle sont intégrées dès la conception, avec des contrôles adaptés aux exigences applicables du RGPD, de l’AI Act et de DORA.",
       ],
       visual: ["VOICEBOT", "ARCHITECTURE SOUS CONTRÔLE"],
+      test: "Tester le voicebot",
       layers: [
         ["Couche vocale", "Des conversations naturelles au téléphone, dans le navigateur ou sur une borne. La couche vocale gère la faible latence, les interruptions et le changement de langue au cours d’un même échange."],
         ["Orchestrateur", "L’agent principal garde le fil, identifie l’intention et transmet le contexte au bon relais. Des workflows définis maintiennent chaque réponse dans son périmètre."],
@@ -251,7 +254,7 @@ const copy = {
       aria: "Contexte du programme STRIKE IT pour le projet Banana Navy",
     },
     final: {
-      heading: ["UNE QUESTION.", "UNE VOIX.", "LA BONNE DIRECTION."],
+      heading: ["UNE QUESTION", "UNE VOIX", "LA BONNE DIRECTION"],
       text: "Le meilleur test reste une conversation. Posez une question simple, écoutez la réponse, puis challengez le prototype.",
       button: "Parler au prototype",
     },
@@ -337,7 +340,6 @@ export default function HomePage() {
                   <span className="bento-glow" aria-hidden="true" />
                   <div className="usage-card-top" data-bento-layer>
                     <IconSprite {...needVisuals[index].icon} label={iconLabel} />
-                    <span>{String(index + 1).padStart(2, "0")}</span>
                   </div>
                   <div className="usage-copy"><h3>{title}</h3><p>{text}</p><small>{note}</small></div>
                 </article>
@@ -386,7 +388,15 @@ export default function HomePage() {
               <div>{content.control.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
             </div>
             <div className="control-grid">
-              <div className="control-visual reveal" aria-hidden="true"><span className="control-orb"><i /><i /><i /><i /><i /></span><strong>{content.control.visual[0]}</strong><small>{content.control.visual[1]}</small></div>
+              <div className="control-visual reveal">
+                <span className="control-orb" aria-hidden="true"><i /><i /><i /><i /><i /></span>
+                <strong>{content.control.visual[0]}</strong>
+                <small>{content.control.visual[1]}</small>
+                <VoicebotTrigger className="button button-primary control-visual-cta" initialLanguage={language}>
+                  <IconSprite col={1} row={1} label="" className="control-cta-icon" />
+                  {content.control.test}
+                </VoicebotTrigger>
+              </div>
               <div className="control-layers">
                 {content.control.layers.map(([title, text], index) => (
                   <article data-bento className="control-layer reveal" key={title}><span className="bento-glow" aria-hidden="true" /><span className="control-layer-number">0{index + 1}</span><div><h3>{title}</h3><p>{text}</p></div></article>
@@ -400,7 +410,7 @@ export default function HomePage() {
           <div className="shell">
             <div className="strike-grid">
               <div className="strike-copy reveal">
-                <h2 data-scroll-title>STRIKE IT<br />2026.</h2>
+                <h2 data-scroll-title>STRIKE IT<br />2026</h2>
                 <p className="strike-lead">{content.strike.lead}</p>
                 <p>{content.strike.body}</p>
                 <p className="strike-guard">{content.strike.guard}</p>
