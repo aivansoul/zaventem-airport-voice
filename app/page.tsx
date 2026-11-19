@@ -116,7 +116,7 @@ const faqs = [
 function SectionRail({ current }: { current: string }) {
   return (
     <div className="section-rail" aria-hidden="true">
-      <span>{current} / 09</span>
+      <span>{current} / 08</span>
       <i />
     </div>
   );
@@ -261,42 +261,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="section-pad voice-section">
-          <div className="shell">
-            <SectionRail current="04" />
-            <div className="section-head section-head-light reveal">
-              <h2 data-scroll-title>HUMAIN DANS<br />LA VOIX.</h2>
-              <p>La personnalité vocale a été pensée comme celle d’un agent d’accueil expérimenté : une voix masculine de 42 à 55 ans, bienveillante et énergique, vive sans être pressée, jamais sportive, publicitaire ou théâtrale.</p>
-            </div>
-            <div className="voice-layout">
-              <div className="voice-qualities">
-                {voiceQualities.map(([number, title, text]) => (
-                  <article data-bento className="quality-card reveal" key={number}>
-                    <span className="bento-glow" aria-hidden="true" />
-                    <span>{number}</span>
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                  </article>
-                ))}
-              </div>
-              <div data-bento className="conversation-card reveal">
-                <span className="bento-glow" aria-hidden="true" />
-                <div className="conversation-head"><span><i /> Conversation exemple</span><b>FR</b></div>
-                <div className="speech speech-user"><small>VOYAGEUSE</small><p>Je peux prendre ma batterie externe dans ma valise ?</p></div>
-                <div className="speech speech-agent">
-                  <small>ACCUEIL VOCAL</small>
-                  <p>Gardez-la avec vous en cabine, pas en soute. Votre compagnie peut aussi fixer des limites de capacité. Vous voulez que je vous indique où vérifier ?</p>
-                  <div className="mini-wave" aria-hidden="true">{[12, 22, 16, 31, 25, 39, 18, 28, 14, 24, 11].map((height, index) => <i style={{ height }} key={`${height}-${index}`} />)}</div>
-                </div>
-                <p className="conversation-note">Exemple illustratif. La formulation peut varier selon la conversation.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="section-pad journey-section" id="fonctionnement">
           <div className="shell">
-            <SectionRail current="05" />
+            <SectionRail current="04" />
             <div className="section-head reveal">
               <h2 data-scroll-title>ÉCOUTER.<br />VÉRIFIER. ORIENTER.</h2>
               <p>La technologie reste en arrière-plan. La personne entend une réponse claire et sait quoi faire ensuite.</p>
@@ -323,7 +290,7 @@ export default function HomePage() {
 
         <section className="section-pad trust-section">
           <div className="shell">
-            <SectionRail current="06" />
+            <SectionRail current="05" />
             <div className="section-head section-head-light reveal">
               <h2 data-scroll-title>UNE BONNE RÉPONSE<br />CONNAÎT SA LIMITE.</h2>
               <p>Le prototype ne confond pas une connaissance vérifiée avec une donnée opérationnelle. Cette séparation réduit les réponses périmées et les certitudes inventées.</p>
@@ -357,7 +324,7 @@ export default function HomePage() {
 
         <section className="section-pad faq-section" id="faq">
           <div className="shell">
-            <SectionRail current="07" />
+            <SectionRail current="06" />
             <div className="faq-layout">
               <div className="faq-intro reveal">
                 <h2 data-scroll-title>CLAIR DÈS<br />LE DÉPART.</h2>
@@ -377,7 +344,7 @@ export default function HomePage() {
 
         <section className="section-pad strike-section" id="strike-it">
           <div className="shell">
-            <SectionRail current="08" />
+            <SectionRail current="07" />
             <div className="strike-grid">
               <div className="strike-copy reveal">
                 <h2 data-scroll-title>STRIKE IT<br />2026.</h2>
@@ -401,7 +368,7 @@ export default function HomePage() {
 
         <section className="final-cta">
           <div className="shell final-cta-inner">
-            <SectionRail current="09" />
+            <SectionRail current="08" />
             <div className="final-cta-content reveal">
               <h2>UNE QUESTION.<br />UNE VOIX.<br /><span>LA BONNE DIRECTION.</span></h2>
               <div>
