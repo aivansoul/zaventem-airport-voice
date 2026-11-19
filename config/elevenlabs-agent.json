@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "project": "Zaventem Airport Voice",
+  "agent_name": "Brussels Airport Voice — Prototype Banana Navy",
+  "status": "remote-live-validated",
+  "api_base_url": "https://api.elevenlabs.io",
+  "agent_id": "agent_4601m7scsffqexhv6g064mbgvtjj",
+  "knowledge_document_id": "8l1xiOt9Lux6fOqwwfeX",
+  "prompt_file": "agent/system-prompt.md",
+  "first_messages_file": "agent/first-messages.json",
+  "knowledge_file": "knowledge/base-connaissances.md",
+  "voice_design_file": "config/voice-design.json",
+  "backup_output_directory": "remote-validation/elevenlabs-backups",
+  "knowledge_document_name": "Brussels Airport — Informations passagers contrôlées — 2026-11-19",
+  "languages": [
+    "fr",
+    "nl",
+    "en"
+  ],
+  "voices": {
+    "fr": {
+      "id": "gidGFDFyCSnGFnZ9hK7l",
+      "name": "Koraly - Virtual Assistant",
+      "profile": "middle-aged, ultra-realistic, warm, nuanced and energetic"
+    },
+    "nl": {
+      "id": "D6MRWCKoavI2xUJXmaCb",
+      "name": "Jennifer - Pleasant Dutch",
+      "profile": "middle-aged, gentle, mature and conversational"
+    },
+    "en": {
+      "id": "ogwqBH5bbF03DSbNiRNN",
+      "name": "Savvy - Warm, Grounded & Natural",
+      "profile": "middle-aged, genuine, approachable and conversational"
+    }
+  },
+  "model": "eleven_v3_conversational",
+  "llm": "gpt-4.1-mini",
+  "tts_settings": {
+    "stability": 0.45,
+    "similarity_boost": 0.75,
+    "speed": 1,
+    "style": 0
+  },
+  "knowledge_mode": "rag",
+  "knowledge_verified_at": "2026-11-19",
+  "public_origins": [
+    "localhost",
+    "127.0.0.1",
+    "localhost:3000",
+    "127.0.0.1:3000",
+    "localhost:3001",
+    "127.0.0.1:3001",
+    "banana-navy.github.io",
+    "aivansoul.github.io"
+  ],
+  "privacy": {
+    "record_voice": true,
+    "retention_days": 30,
+    "delete_transcript_and_pii": true,
+    "delete_audio": false,
+    "zero_retention_mode": false
+  }
+}

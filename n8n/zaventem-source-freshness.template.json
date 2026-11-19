@@ -1,0 +1,169 @@
+{
+  "name": "Zaventem — contrôle de fraîcheur des sources (inactif)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Déclencheur manuel",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-720, 40]
+    },
+    {
+      "parameters": {
+        "jsCode": "if ($env.ZAVENTEM_REFRESH_AUTHORIZED !== 'true') { throw new Error('Contrôle bloqué : définir ZAVENTEM_REFRESH_AUTHORIZED=true après autorisation.'); }\nreturn [{ json: { started_at: new Date().toISOString(), trigger_kind: 'manual' } }];"
+      },
+      "id": "safety-gate",
+      "name": "Garde-fou autorisation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-500, 40]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "insert into zaventem_voicebot.refresh_runs (trigger_kind, status) values ('manual', 'running') returning id, started_at;",
+        "options": {}
+      },
+      "id": "open-run",
+      "name": "Ouvrir le run d'audit",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [-270, 40],
+      "credentials": {
+        "postgres": {
+          "id": "REPLACE_AFTER_IMPORT",
+          "name": "Supabase Zaventem Registry"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "select id, canonical_url, freshness_class, content_sha256 from zaventem_voicebot.knowledge_sources where status in ('active', 'needs_review', 'conflict') and next_review_at <= now() order by next_review_at asc limit 25;",
+        "options": {}
+      },
+      "id": "due-sources",
+      "name": "Lire les sources dues",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [-30, 40],
+      "credentials": {
+        "postgres": {
+          "id": "REPLACE_AFTER_IMPORT",
+          "name": "Supabase Zaventem Registry"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "id": "one-at-a-time",
+      "name": "Une source à la fois",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [210, 40]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.canonical_url }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "Banana-Navy-Zaventem-Knowledge-Review/1.0 (+manual-authorized-check)"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          },
+          "timeout": 15000
+        }
+      },
+      "id": "check-source",
+      "name": "Vérifier la source autorisée",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [450, 40],
+      "notes": "Ne pas activer sans autorisation. Le corps sert au hash en mémoire et n'est pas stocké."
+    },
+    {
+      "parameters": {
+        "jsCode": "const crypto = require('crypto');\nconst response = $json;\nconst body = typeof response.body === 'string' ? response.body.replace(/\\s+/g, ' ').trim() : '';\nreturn [{ json: { source_id: $('Une source à la fois').item.json.id, http_status: Number(response.statusCode || 0), normalized_sha256: body ? crypto.createHash('sha256').update(body).digest('hex') : null, checked_at: new Date().toISOString(), review_required: true } }];"
+      },
+      "id": "hash-observation",
+      "name": "Créer l'observation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [690, 40],
+      "notes": "Aucun contenu brut ne sort de ce nœud."
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "update zaventem_voicebot.knowledge_sources set status = 'needs_review', last_http_status = $1, updated_at = now() where id = $2 returning id, status;",
+        "options": {
+          "queryReplacement": "={{ [$json.http_status, $json.source_id] }}"
+        }
+      },
+      "id": "flag-review",
+      "name": "Demander une revue humaine",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [930, 40],
+      "credentials": {
+        "postgres": {
+          "id": "REPLACE_AFTER_IMPORT",
+          "name": "Supabase Zaventem Registry"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Déclencheur manuel": {
+      "main": [[{"node": "Garde-fou autorisation", "type": "main", "index": 0}]]
+    },
+    "Garde-fou autorisation": {
+      "main": [[{"node": "Ouvrir le run d'audit", "type": "main", "index": 0}]]
+    },
+    "Ouvrir le run d'audit": {
+      "main": [[{"node": "Lire les sources dues", "type": "main", "index": 0}]]
+    },
+    "Lire les sources dues": {
+      "main": [[{"node": "Une source à la fois", "type": "main", "index": 0}]]
+    },
+    "Une source à la fois": {
+      "main": [[], [{"node": "Vérifier la source autorisée", "type": "main", "index": 0}]]
+    },
+    "Vérifier la source autorisée": {
+      "main": [[{"node": "Créer l'observation", "type": "main", "index": 0}]]
+    },
+    "Créer l'observation": {
+      "main": [[{"node": "Demander une revue humaine", "type": "main", "index": 0}]]
+    },
+    "Demander une revue humaine": {
+      "main": [[{"node": "Une source à la fois", "type": "main", "index": 0}]]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveExecutionProgress": true
+  },
+  "active": false,
+  "versionId": "00000000-0000-4000-8000-000000000001",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}

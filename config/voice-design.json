@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "intent": {
+    "age_range": "42–55",
+    "human_impression": "Une personne d’accueil expérimentée, présente et réellement attentive.",
+    "energy": "Énergique mais contenue : éveillée, souriante, jamais sportive ni publicitaire.",
+    "pace": "Naturel et alerte, avec de micro-pauses aux endroits utiles.",
+    "warmth": "Chaleureuse sans surjouer l’empathie.",
+    "avoid": [
+      "voix de coach sportif",
+      "annonce radio ou publicité",
+      "sourire permanent forcé",
+      "intonation montante à chaque phrase",
+      "diction théâtrale",
+      "prosodie robotique",
+      "rires, soupirs, chuchotements ou balises émotionnelles générées"
+    ]
+  },
+  "model": "eleven_v3_conversational",
+  "settings": {
+    "stability": 0.45,
+    "similarity_boost": 0.75,
+    "speed": 1,
+    "style": 0,
+    "expressive_mode": true,
+    "text_normalisation_type": "system_prompt",
+    "enable_phoneme_tags": false
+  },
+  "candidates": {
+    "fr": {
+      "voice_id": "gidGFDFyCSnGFnZ9hK7l",
+      "name": "Koraly — Virtual Assistant",
+      "target": "Français naturel, nuancé, chaleureux et réactif."
+    },
+    "nl": {
+      "voice_id": "D6MRWCKoavI2xUJXmaCb",
+      "name": "Jennifer — Pleasant Dutch",
+      "target": "Néerlandais mûr, agréable et conversationnel."
+    },
+    "en": {
+      "voice_id": "ogwqBH5bbF03DSbNiRNN",
+      "name": "Savvy — Warm, Grounded & Natural",
+      "target": "Anglais posé, authentique et accessible."
+    }
+  },
+  "audition_texts": {
+    "fr": "Bonjour, welkom, hello — bienvenue à Brussels Airport. Comment puis-je vous aider ? Votre porte peut changer jusqu’au dernier moment ; vérifiez les écrans de l’aéroport et l’application avant de vous déplacer.",
+    "nl": "Welkom op Brussels Airport. Waarmee kan ik u helpen? Uw gate kan tot het laatste moment wijzigen; controleer daarom de schermen en de luchthavenapp.",
+    "en": "Welcome to Brussels Airport. How can I help you? Your gate can change until the last moment, so please check the airport screens and app before moving on."
+  },
+  "acceptance_criteria": [
+    "On entend une personne de 42 à 55 ans, pas une voix adolescente.",
+    "L’énergie reste accueillante et maîtrisée, même sur une consigne urgente.",
+    "Les trois langues ont une personnalité cohérente sans imiter le même timbre.",
+    "Aucune pose robotique, mélodie répétitive ou cadence de publicité n’est perceptible.",
+    "Les noms Brussels Airport, Zaventem, BRUce, Schengen et Fast Lane restent intelligibles.",
+    "Les numéros de téléphone sont lisibles à voix haute sans accélération.",
+    "La voix sait faire une pause courte avant une information importante sans ajouter de remplissage."
+  ]
+}

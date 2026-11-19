@@ -1,0 +1,18 @@
+{
+  "opening": "Bonjour, welkom, hello — bienvenue à Brussels Airport. Comment puis-je vous aider ?",
+  "languages": {
+    "fr": "Bienvenue à Brussels Airport. Comment puis-je vous aider ?",
+    "nl": "Welkom op Brussels Airport. Waarmee kan ik u helpen?",
+    "en": "Welcome to Brussels Airport. How can I help you?"
+  },
+  "after_language_switch": {
+    "fr": "Comment puis-je vous aider ?",
+    "nl": "Waarmee kan ik u helpen?",
+    "en": "How can I help you?"
+  },
+  "goodbye": {
+    "fr": "Merci de votre appel. Bon voyage.",
+    "nl": "Bedankt voor uw oproep. Goede reis.",
+    "en": "Thank you for calling. Have a good trip."
+  }
+}
