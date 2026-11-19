@@ -247,8 +247,8 @@ p { color: var(--muted); }
 .hero-line { display: block; overflow: hidden; padding: 0.025em 0 0.045em; font-size: .72em; line-height: 1.02; }
 .hero-line:first-child { font-size: 1em; font-weight: 770; line-height: .96; }
 .hero-line > span { display: block; transform: translateY(118%); animation: hero-line-in 1.1s cubic-bezier(0.2, 0.78, 0.2, 1) forwards; }
-.hero-line:nth-child(2) > span { animation-delay: 0.13s; }
-.hero-line:nth-child(3) > span { animation-delay: 0.22s; }
+.hero-line:nth-child(2) > span { animation-delay: 0.26s; }
+.hero-line:nth-child(3) > span { animation-delay: 0.52s; }
 .hero-copy > p { max-width: 48ch; margin: clamp(22px, 2.1vw, 42px) 0 0; color: rgba(255,255,255,.9); font-size: clamp(1rem, 1.3vw, 1.8rem); line-height: 1.45; }
 .hero-how-link { width: fit-content; margin-top: clamp(25px, 2.1vw, 44px); display: inline-flex; align-items: center; gap: 13px; color: var(--white); font-size: clamp(.9rem, 1.15vw, 1.45rem); font-weight: 760; text-decoration: none; animation: hero-copy-in 1s .46s both cubic-bezier(.2,.7,.2,1); }
 .hero-how-link span { font-size: 1.35rem; transition: transform .25s ease; }
@@ -593,8 +593,8 @@ p { color: var(--muted); }
 .banana-title-line { display: block; overflow: hidden; padding: .03em 0 .08em; }
 .banana-title-line-inner { display: block; }
 .banana-rise-line.reveal { opacity: 0; translate: 0 112%; transition: opacity .72s cubic-bezier(.22,1,.36,1), translate .92s cubic-bezier(.22,1,.36,1); }
-.banana-title-line:nth-child(2) .banana-rise-line { transition-delay: .14s; }
-.banana-title-line:nth-child(3) .banana-rise-line { transition-delay: .28s; }
+.banana-title-line:nth-child(2) .banana-rise-line { transition-delay: .28s; }
+.banana-title-line:nth-child(3) .banana-rise-line { transition-delay: .56s; }
 .banana-rise-line.reveal.is-visible { opacity: 1; translate: 0 0; }
 .banana-page [data-scroll-title] { background-image: linear-gradient(90deg, var(--title-full) 0 var(--title-fill), var(--title-faded) calc(var(--title-fill) + 11%)); }
 .banana-hero [data-scroll-title],
@@ -681,9 +681,9 @@ p { color: var(--muted); }
 .banana-control-visual-4 { background: radial-gradient(circle at 75% 25%, #e10c34, transparent 38%), radial-gradient(circle at 20% 78%, #547fa4, transparent 43%), #f1f3f2; }
 .banana-control-visual-5 { background: radial-gradient(circle at 50% 48%, #f7f9fb, transparent 22%), radial-gradient(circle at 82% 76%, #e10c34, transparent 39%), #061525; }
 .banana-service-list { padding-left: 56px; border-bottom: 1px solid var(--banana-line-dark); }
-.banana-service-row { position: relative; isolation: isolate; min-height: 52vh; padding: clamp(40px, 5vw, 72px) 0; display: flex; flex-direction: column; justify-content: center; border-top: 1px solid var(--banana-line-dark); opacity: 1; }
+.banana-service-row { position: relative; isolation: isolate; min-height: clamp(190px, 24vh, 240px); padding: clamp(22px, 2.5vw, 34px) 0; display: flex; flex-direction: column; justify-content: center; border-top: 1px solid var(--banana-line-dark); opacity: 1; }
 .banana-service-meta { margin-bottom: auto; display: flex; justify-content: space-between; gap: 28px; color: rgba(255,255,255,.48); font: 520 .6rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .06em; text-transform: uppercase; }
-.banana-service-row h3 { margin: 56px 0 22px; font-size: clamp(2.2rem, 4vw, 4.4rem); text-transform: uppercase; }
+.banana-service-row h3 { margin: 24px 0 14px; font-size: clamp(2.2rem, 4vw, 4.4rem); text-transform: uppercase; }
 .banana-service-row p { max-width: 650px; margin: 0; color: rgba(255,255,255,.6); font-size: .86rem; line-height: 1.72; }
 .banana-controls { color: var(--navy); background: var(--white); }
 .banana-controls .banana-section-head { align-items: start; }
@@ -1018,7 +1018,7 @@ p { color: var(--muted); }
   .banana-inline-link { min-height: 42px; }
   .banana-voice-rules h2, .banana-section-head h2 { font-size: clamp(3.25rem, 15.5vw, 4.8rem); }
   .banana-voice-rules-copy p { font-size: 1rem; }
-  .banana-service-row { min-height: 158px; padding: 20px 16px; border-radius: 0; }
+  .banana-service-row { min-height: 132px; padding: 16px; border-radius: 0; }
   .banana-control-row { min-height: 112px; padding: 14px; border-radius: 0; }
   .banana-service-meta { align-items: flex-start; flex-direction: column; gap: 8px; }
   .banana-service-row h3 { margin-top: 0; font-size: clamp(1.2rem, 6vw, 1.65rem); }
