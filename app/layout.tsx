@@ -12,14 +12,14 @@ export const metadata: Metadata = {
     template: "%s | Zaventem Airport Voice",
   },
   description:
-    "Prototype Banana Navy d'un accueil vocal humain, trilingue et sourcé pour les voyageurs de Brussels Airport.",
+    "Banana Navy prototype of a human, trilingual and source-grounded voice assistant for Brussels Airport travellers.",
   alternates: publicSiteUrl ? { canonical: `${publicSiteUrl}/` } : undefined,
   robots: { index: false, follow: false },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr" data-scroll-behavior="smooth">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>
         <VoiceProvider>{children}</VoiceProvider>
       </body>

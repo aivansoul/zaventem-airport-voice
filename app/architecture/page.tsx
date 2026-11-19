@@ -112,7 +112,7 @@ export default function ArchitecturePage() {
           </div>
         </section>
 
-        <section className="page-cta"><div className="shell"><div><h2>La technique doit se faire oublier.</h2></div><div><VoicebotTrigger className="button button-white">Tester la conversation</VoicebotTrigger><Link className="text-link light-link" href="/sources">Consulter les sources <span>→</span></Link></div></div></section>
+        <section className="page-cta"><div className="shell"><div><h2>La technique doit se faire oublier.</h2></div><div><VoicebotTrigger className="button button-white">Tester la conversation</VoicebotTrigger><Link className="text-link light-link" href="/banana-navy">Découvrir Banana Navy <span>→</span></Link></div></div></section>
       </main>
       <SiteFooter />
     </>
