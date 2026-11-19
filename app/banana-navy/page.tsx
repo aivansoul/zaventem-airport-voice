@@ -87,7 +87,7 @@ export default function BananaNavyPage() {
       <main id="contenu" className="banana-page">
         <section className="banana-hero section-pad">
           <div className="shell banana-hero-grid">
-            <h1 className="reveal"><span className="banana-title-line" data-scroll-title>DES VOICEBOTS</span><span className="banana-title-line banana-title-accent" data-scroll-title>QUI RESTENT FIABLES</span></h1>
+            <h1><span className="banana-title-line"><span className="banana-title-line-inner banana-rise-line reveal" data-scroll-title="hero">DES VOICEBOTS</span></span><span className="banana-title-line"><span className="banana-title-line-inner banana-title-accent banana-rise-line reveal" data-scroll-title="hero">QUI RESTENT FIABLES</span></span></h1>
             <div className="banana-hero-side reveal">
               <p>Studio belge d’ingénierie et d’IA, nous construisons des agents vocaux et des systèmes multi-agents, du premier cadrage à la production, au monitoring et à l’amélioration continue.</p>
               <div className="banana-hero-actions">
@@ -100,7 +100,7 @@ export default function BananaNavyPage() {
 
         <section className="banana-voice-rules section-pad">
           <div className="shell banana-voice-rules-grid">
-            <h2 className="reveal"><span className="banana-title-line" data-scroll-title>VOTRE VOIX</span><span className="banana-title-line banana-title-accent" data-scroll-title>VOS RÈGLES</span></h2>
+            <h2><span className="banana-title-line"><span className="banana-title-line-inner banana-rise-line reveal" data-scroll-title>VOTRE VOIX</span></span><span className="banana-title-line"><span className="banana-title-line-inner banana-title-accent banana-rise-line reveal" data-scroll-title>VOS RÈGLES</span></span></h2>
             <div className="banana-voice-rules-copy reveal">
               <p>Nous concevons des agents vocaux qui décrochent, comprennent l’appelant et agissent, ainsi que les systèmes multi-agents qui, en coulisses, recherchent, vérifient et orientent. Le dernier mot revient toujours à un humain.</p>
               <p>Chaque bot que nous livrons est cadré, encadré et observable. Lignes de sécurité publique, hôpitaux, banques, défense : des environnements où une hallucination n’est pas une option.</p>
@@ -110,9 +110,9 @@ export default function BananaNavyPage() {
 
         <section className="banana-services section-pad">
           <div className="shell">
-            <div className="banana-section-head reveal">
-              <h2><span className="banana-title-line" data-scroll-title>DES SERVICES</span><span className="banana-title-line banana-title-accent" data-scroll-title>DE BOUT EN BOUT</span></h2>
-              <p>Nous transformons des besoins métier complexes en systèmes d’IA fiables. Le conseil, le produit, les intégrations et le contrôle opérationnel avancent dans une même architecture.</p>
+            <div className="banana-section-head">
+              <h2><span className="banana-title-line"><span className="banana-title-line-inner banana-rise-line reveal" data-scroll-title>DES SERVICES</span></span><span className="banana-title-line"><span className="banana-title-line-inner banana-title-accent banana-rise-line reveal" data-scroll-title>DE BOUT EN BOUT</span></span></h2>
+              <p className="reveal">Nous transformons des besoins métier complexes en systèmes d’IA fiables. Le conseil, le produit, les intégrations et le contrôle opérationnel avancent dans une même architecture.</p>
             </div>
             <div className="banana-services-grid" data-banana-scroll="services">
               <div className="banana-services-visual reveal" aria-hidden="true">
@@ -135,9 +135,9 @@ export default function BananaNavyPage() {
 
         <section className="banana-controls section-pad">
           <div className="shell">
-            <div className="banana-section-head reveal">
-              <h2><span className="banana-title-line" data-scroll-title>CINQ COUCHES</span><span className="banana-title-line banana-title-accent" data-scroll-title>UN SEUL MODÈLE DE CONTRÔLE</span></h2>
-              <div className="banana-controls-intro">
+            <div className="banana-section-head">
+              <h2><span className="banana-title-line"><span className="banana-title-line-inner banana-rise-line reveal" data-scroll-title>CINQ COUCHES</span></span><span className="banana-title-line"><span className="banana-title-line-inner banana-title-accent banana-rise-line reveal" data-scroll-title>UN SEUL MODÈLE DE CONTRÔLE</span></span></h2>
+              <div className="banana-controls-intro reveal">
                 <p>Une belle voix ne suffit pas. La fiabilité vient d’une architecture où les connaissances, les permissions, les règles et la reprise humaine sont conçues comme un seul système.</p>
                 <p>Chaque couche est documentée, testée et surveillée afin que le système reste utile, observable et sous contrôle dans le temps.</p>
               </div>
@@ -163,9 +163,9 @@ export default function BananaNavyPage() {
 
         <section className="banana-process section-pad">
           <div className="shell">
-            <div className="banana-section-head reveal">
-              <h2><span className="banana-title-line" data-scroll-title>CONÇU POUR LE BUSINESS</span><span className="banana-title-line banana-title-accent" data-scroll-title>PRÊT POUR LE TERRAIN</span></h2>
-              <p>Banana Navy accompagne le cycle complet. L’expérience vocale, l’architecture, la sécurité, les intégrations et l’amélioration continue avancent ensemble.</p>
+            <div className="banana-section-head">
+              <h2><span className="banana-title-line"><span className="banana-title-line-inner banana-rise-line reveal" data-scroll-title>CONÇU POUR LE BUSINESS</span></span><span className="banana-title-line"><span className="banana-title-line-inner banana-title-accent banana-rise-line reveal" data-scroll-title>PRÊT POUR LE TERRAIN</span></span></h2>
+              <p className="reveal">Banana Navy accompagne le cycle complet. L’expérience vocale, l’architecture, la sécurité, les intégrations et l’amélioration continue avancent ensemble.</p>
             </div>
             <div className="banana-process-grid">
               {deliveryProcess.map(([number, title, text]) => (
@@ -181,12 +181,12 @@ export default function BananaNavyPage() {
 
         <section className="banana-page-cta">
           <div className="shell">
-            <h2 className="reveal"><span className="banana-title-line" data-scroll-title>PARLONS-EN</span></h2>
+            <h2><span className="banana-title-line"><span className="banana-title-line-inner banana-rise-line reveal" data-scroll-title>PARLONS-EN</span></span></h2>
             <div className="banana-page-cta-copy reveal">
               <p>Votre communication mérite mieux qu’une réponse plausible.</p>
               <div className="banana-page-cta-actions">
-                <a className="button banana-button-dark" href="https://banana-navy.ai/fr/" target="_blank" rel="noreferrer">Visiter banana-navy.ai <span aria-hidden="true">↗</span></a>
-                <a className="banana-inline-link banana-inline-link-dark" href="tel:+32495277044">Let&apos;s Talk · +32 495 27 70 44</a>
+                <a className="button banana-button-dark" href="tel:+32495277044" aria-label="Appeler Marc-Antoine au +32 495 27 70 44">+32 495 27 70 44</a>
+                <a className="banana-inline-link banana-inline-link-dark" href="https://banana-navy.ai/fr/" target="_blank" rel="noreferrer">Visiter banana-navy.ai <span aria-hidden="true">↗</span></a>
               </div>
             </div>
           </div>

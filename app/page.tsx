@@ -302,7 +302,7 @@ export default function HomePage() {
                 <div className="hero-copy">
                   <span className="hero-brandline">ZAVENTEM VOICE</span>
                   <h1 id="hero-title">
-                    {content.hero.title.map((line) => <span className="hero-line" key={line}><span>{line}</span></span>)}
+                    {content.hero.title.map((line, index) => <span className="hero-line" key={index}><span data-scroll-title="hero">{line}</span></span>)}
                   </h1>
                   <p>{content.hero.subtitle}</p>
                   <a className="hero-how-link" href="#usages">{content.hero.how}<span aria-hidden="true">↓</span></a>

@@ -14,6 +14,7 @@ export function LandingMotion() {
     const titleNodes = Array.from(document.querySelectorAll<HTMLElement>("[data-scroll-title]"));
     const fillNodes = Array.from(document.querySelectorAll<HTMLElement>("[data-scroll-fill-row]"));
     const bentoNodes = Array.from(document.querySelectorAll<HTMLElement>("[data-bento]"));
+    const revealTargets = new Map<Element, HTMLElement[]>();
 
     let revealObserver: IntersectionObserver | undefined;
     let frame = 0;
@@ -25,22 +26,36 @@ export function LandingMotion() {
         (entries) => {
           entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
-            entry.target.classList.add("is-visible");
+            (revealTargets.get(entry.target) ?? [entry.target as HTMLElement]).forEach((node) => {
+              node.classList.add("is-visible");
+            });
             revealObserver?.unobserve(entry.target);
           });
         },
         { rootMargin: "0px 0px -8% 0px", threshold: 0.14 },
       );
-      revealNodes.forEach((node) => revealObserver?.observe(node));
+      revealNodes.forEach((node) => {
+        const target = node.classList.contains("banana-rise-line") && node.parentElement
+          ? node.parentElement
+          : node;
+        const nodes = revealTargets.get(target) ?? [];
+        nodes.push(node);
+        revealTargets.set(target, nodes);
+        revealObserver?.observe(target);
+      });
     }
 
     const updateTitles = () => {
       frame = 0;
       const viewport = window.innerHeight;
       titleNodes.forEach((node) => {
-        const bounds = node.getBoundingClientRect();
-        const progress = clamp((viewport * 0.88 - bounds.top) / (viewport * 0.58 + bounds.height));
-        node.style.setProperty("--title-fill", `${Math.round(progress * 100)}%`);
+        const bounds = node.classList.contains("banana-rise-line") && node.parentElement
+          ? node.parentElement.getBoundingClientRect()
+          : node.getBoundingClientRect();
+        const progress = node.dataset.scrollTitle === "hero"
+          ? clamp(0.12 + window.scrollY / (viewport * 0.72))
+          : clamp((viewport * 0.88 - bounds.top) / (viewport * 0.58 + bounds.height));
+        node.style.setProperty("--title-fill", `${(progress * 100).toFixed(2)}%`);
       });
       fillNodes.forEach((node) => {
         const bounds = node.getBoundingClientRect();
