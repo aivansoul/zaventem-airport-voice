@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { BananaScrollExperience } from "@/components/banana-scroll-experience";
 import { LandingMotion } from "@/components/landing-motion";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -40,11 +40,32 @@ const services = [
   },
 ];
 
-const controlPoints = [
-  ["Connaissance", "Sources approuvées, structurées et datées"],
-  ["Garde-fous", "Règles déterministes en dehors du modèle"],
-  ["Actions", "Permissions minimales, contrôlées et traçables"],
-  ["Relais", "Passage à l’humain avec tout le contexte"],
+const controlLayers = [
+  {
+    number: "01 / 05",
+    title: "Couche vocale",
+    text: "Des conversations naturelles au téléphone, dans le navigateur ou sur une borne. La couche vocale gère la faible latence, les interruptions et les changements de langue au cours d’un même échange.",
+  },
+  {
+    number: "02 / 05",
+    title: "Orchestrateur",
+    text: "L’agent principal garde le fil, identifie l’intention et transmet le contexte au bon relais. Des workflows définis maintiennent chaque réponse dans son périmètre.",
+  },
+  {
+    number: "03 / 05",
+    title: "Agents spécialisés",
+    text: "Des agents dédiés prennent en charge le routage, la prise de rendez-vous ou un processus métier précis à partir de sources vérifiées et d’outils autorisés.",
+  },
+  {
+    number: "04 / 05",
+    title: "Outils et garde-fous",
+    text: "Les contrôles IA, les outils approuvés et les règles déterministes hors modèle encadrent les réponses et les actions. Une information incertaine déclenche une clarification ou une escalade.",
+  },
+  {
+    number: "05 / 05",
+    title: "Contrôle humain",
+    text: "L’équipe peut reprendre la main avec tout le contexte. Le monitoring, l’évaluation continue et la validation des actions sensibles gardent le système sous contrôle dans la durée.",
+  },
 ];
 
 const deliveryProcess = [
@@ -54,31 +75,21 @@ const deliveryProcess = [
   ["04", "Évolution", "Les performances observées servent à améliorer les connaissances et les workflows de façon documentée et mesurable."],
 ];
 
-const demandingSectors = [
-  "Défense et gestion de crise",
-  "Services publics",
-  "Santé",
-  "Banque, finance et assurance",
-  "Énergie et infrastructures critiques",
-  "Transport et logistique",
-];
-
 export default function BananaNavyPage() {
   return (
     <>
       <LandingMotion />
+      <BananaScrollExperience />
       <a className="skip-link" href="#contenu">Aller au contenu</a>
       <div className="prototype-ribbon"><div className="shell"><span>Concept indépendant par Banana Navy</span><span aria-hidden="true">•</span><span>Prototype non officiel</span></div></div>
       <SiteHeader active="banana-navy" />
 
       <main id="contenu" className="banana-page">
-        <section className="banana-hero">
-          <div className="banana-hero-visual" aria-hidden="true"><i /><i /><i /></div>
-          <div className="shell banana-hero-inner">
-            <p className="banana-hero-intro reveal">Studio belge d’ingénierie et d’IA pour les communications qui ne peuvent pas être approximatives.</p>
+        <section className="banana-hero section-pad">
+          <div className="shell banana-hero-grid">
             <h1 className="reveal">DES VOICEBOTS<br /><span>QUI RESTENT FIABLES</span></h1>
-            <div className="banana-hero-bottom reveal">
-              <p>Nous construisons des agents vocaux et des systèmes multi-agents, du premier cadrage à la production, au monitoring et à l’amélioration continue.</p>
+            <div className="banana-hero-side reveal">
+              <p>Studio belge d’ingénierie et d’IA, nous construisons des agents vocaux et des systèmes multi-agents, du premier cadrage à la production, au monitoring et à l’amélioration continue.</p>
               <div className="banana-hero-actions">
                 <a className="button banana-button-light" href="https://banana-navy.ai/fr/" target="_blank" rel="noreferrer">Découvrir Banana Navy <span aria-hidden="true">↗</span></a>
                 <a className="banana-inline-link" href="tel:+32495277044">Parler à Marc <span aria-hidden="true">→</span></a>
@@ -95,7 +106,7 @@ export default function BananaNavyPage() {
               <p>Chaque bot que nous livrons est cadré, encadré et observable. Lignes de sécurité publique, hôpitaux, banques, défense : des environnements où une hallucination n’est pas une option.</p>
             </div>
           </div>
-          <div className="shell banana-voice-rules-visual reveal" role="img" aria-label="Composition abstraite dans les tons cuivre, orange et rose">
+          <div className="shell banana-voice-rules-visual reveal" role="img" aria-label="Composition abstraite dans les tons rouge, blanc et bleu">
             <span>VOICE AGENTS</span>
             <span>HUMAN CONTROL</span>
           </div>
@@ -107,11 +118,15 @@ export default function BananaNavyPage() {
               <h2>DES SERVICES<br /><span>DE BOUT EN BOUT</span></h2>
               <p>Nous transformons des besoins métier complexes en systèmes d’IA fiables. Le conseil, le produit, les intégrations et le contrôle opérationnel avancent dans une même architecture.</p>
             </div>
-            <div className="banana-services-grid">
-              <div className="banana-services-visual reveal" role="img" aria-label="Visuel abstrait Banana Navy dans les tons orange et cuivre"><i /><i /></div>
+            <div className="banana-services-grid" data-banana-scroll>
+              <div className="banana-services-visual reveal" aria-hidden="true">
+                {services.map((service, index) => (
+                  <div className={`banana-scroll-visual banana-scroll-visual-${index + 1} ${index === 0 ? "is-active" : ""}`} data-banana-scroll-visual key={service.title}><i /><i /></div>
+                ))}
+              </div>
               <div className="banana-service-list">
                 {services.map((service) => (
-                  <article className="banana-service-row reveal" key={service.title}>
+                  <article className="banana-service-row reveal" data-banana-scroll-row key={service.title}>
                     <div className="banana-service-meta"><span>{service.number}</span><span>{service.meta}</span></div>
                     <h3>{service.title}</h3>
                     <p>{service.text}</p>
@@ -123,30 +138,29 @@ export default function BananaNavyPage() {
         </section>
 
         <section className="banana-controls section-pad">
-          <div className="shell banana-controls-grid">
-            <div className="banana-controls-copy reveal">
-              <h2>FIABLE<br /><span>PAR CONCEPTION</span></h2>
-              <p>Une belle voix ne suffit pas. La fiabilité vient d’une architecture où les connaissances, les permissions, les règles et la reprise humaine sont conçues comme un seul système.</p>
-              <a className="banana-inline-link banana-inline-link-dark" href="https://banana-navy.ai/fr/voice-agents/" target="_blank" rel="noreferrer">Voir notre approche des agents vocaux <span aria-hidden="true">↗</span></a>
+          <div className="shell">
+            <div className="banana-section-head reveal">
+              <h2>CINQ COUCHES<br /><span>UN SEUL MODÈLE DE CONTRÔLE</span></h2>
+              <div className="banana-controls-intro">
+                <p>Une belle voix ne suffit pas. La fiabilité vient d’une architecture où les connaissances, les permissions, les règles et la reprise humaine sont conçues comme un seul système.</p>
+                <p>Chaque couche est documentée, testée et surveillée afin que le système reste utile, observable et sous contrôle dans le temps.</p>
+              </div>
             </div>
-            <div className="banana-control-list reveal">
-              {controlPoints.map(([label, value]) => (
-                <div key={label}><strong>{label}</strong><span>{value}</span><i aria-hidden="true">↗</i></div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="banana-critical section-pad">
-          <div className="shell banana-critical-grid">
-            <div className="banana-critical-copy reveal">
-              <h2>QUAND CHAQUE<br /><span>MOT COMPTE</span></h2>
-              <p>Nous concevons pour des environnements sensibles et exigeants. Le système doit rester utile sous pression, fonctionner dans plusieurs langues et rendre ses limites visibles à l’opérateur comme à l’appelant.</p>
-            </div>
-            <div className="banana-sector-list reveal">
-              {demandingSectors.map((sector, index) => (
-                <div key={sector}><span>{String(index + 1).padStart(2, "0")}</span><strong>{sector}</strong></div>
-              ))}
+            <div className="banana-controls-grid" data-banana-scroll>
+              <div className="banana-control-visual reveal" aria-hidden="true">
+                {controlLayers.map((layer, index) => (
+                  <div className={`banana-scroll-visual banana-control-visual-${index + 1} ${index === 0 ? "is-active" : ""}`} data-banana-scroll-visual key={layer.title}><i /><i /></div>
+                ))}
+              </div>
+              <div className="banana-control-list">
+                {controlLayers.map((layer) => (
+                  <article className="banana-control-row reveal" data-banana-scroll-row key={layer.title}>
+                    <span>{layer.number}</span>
+                    <h3>{layer.title}</h3>
+                    <p>{layer.text}</p>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -165,20 +179,6 @@ export default function BananaNavyPage() {
                   <p>{text}</p>
                 </article>
               ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="banana-proof section-pad">
-          <div className="shell banana-proof-grid">
-            <div className="reveal">
-              <h2>UNE ÉQUIPE<br /><span>QUI CONSTRUIT</span></h2>
-              <p>Ingénierie IA, développement logiciel, design conversationnel et intégration système sont réunis dans une même équipe. Cette continuité évite qu’une promesse commerciale se perde entre un prototype et la réalité opérationnelle.</p>
-            </div>
-            <div className="banana-proof-evidence reveal">
-              <strong>STRIKE IT 2026</strong>
-              <p>Le projet Voice Bot de Banana Navy a été sélectionné dans le programme Belgian Defence STRIKE IT 2026. Il illustre notre travail sur une communication de crise robuste et résiliente, distincte de ce concept Zaventem.</p>
-              <Link href="/#strike-it">Voir le contexte du projet <span aria-hidden="true">→</span></Link>
             </div>
           </div>
         </section>

@@ -32,17 +32,19 @@ const copy = {
     skip: "Skip to content",
     nav: { presentation: "Presentation", architecture: "Architecture", bananaNavy: "Banana Navy", navigation: "Main navigation", home: "Zaventem Voice, home", openMenu: "Open menu", closeMenu: "Close menu", language: "Page language" },
     hero: {
-      title: ["The airport answers you", "Out loud"],
-      subtitle: "A trilingual voice assistant that guides you, simply.",
+      title: ["Your airport", "A voice to guide", "your journey"],
+      subtitle: "Ask about your flight, baggage or airport services. Simply speak. We’ll help you find your way.",
       test: "Try the voicebot",
-      how: "How it works",
+      how: "Discover how it works",
       greeting: "Hello, welkom, bonjour.",
+      ready: "Ready when you are",
+      deviceNote: "Uses your microphone and speakers",
       greetingAria: "The voicebot welcomes you in English, Dutch and French",
       featuresAria: "Key features",
       features: [
         ["Three languages", "English · Nederlands · Français"],
         ["Clear answers", "Useful information for your journey"],
-        ["Here to listen", "Simply ask your question"],
+        ["Here to listen", "Ask naturally, at your own pace"],
       ],
     },
     questions: {
@@ -109,17 +111,19 @@ const copy = {
     skip: "Ga naar de inhoud",
     nav: { presentation: "Presentatie", architecture: "Architectuur", bananaNavy: "Banana Navy", navigation: "Hoofdnavigatie", home: "Zaventem Voice, startpagina", openMenu: "Menu openen", closeMenu: "Menu sluiten", language: "Taal van de pagina" },
     hero: {
-      title: ["De luchthaven geeft u antwoord", "Hardop"],
-      subtitle: "Een drietalige voicebot die u eenvoudig op weg helpt.",
+      title: ["Uw luchthaven", "Een stem als gids", "op uw reis"],
+      subtitle: "Vraag naar uw vlucht, bagage of de diensten op de luchthaven. Spreek gewoon. Wij helpen u de juiste weg te vinden.",
       test: "Probeer de voicebot",
-      how: "Zo werkt het",
+      how: "Ontdek hoe het werkt",
       greeting: "Welkom, bonjour, hello.",
+      ready: "Klaar wanneer u dat bent",
+      deviceNote: "Gebruikt uw microfoon en luidsprekers",
       greetingAria: "De voicebot verwelkomt u in het Nederlands, Frans en Engels",
       featuresAria: "Belangrijkste kenmerken",
       features: [
         ["Drie talen", "Nederlands · Français · English"],
         ["Duidelijke antwoorden", "Nuttige informatie voor uw reis"],
-        ["We luisteren naar u", "Stel gewoon uw vraag"],
+        ["We luisteren naar u", "Vraag natuurlijk, op uw eigen tempo"],
       ],
     },
     questions: {
@@ -186,17 +190,19 @@ const copy = {
     skip: "Aller au contenu",
     nav: { presentation: "Présentation", architecture: "Architecture", bananaNavy: "Banana Navy", navigation: "Navigation principale", home: "Zaventem Voice, accueil", openMenu: "Ouvrir le menu", closeMenu: "Fermer le menu", language: "Langue de la page" },
     hero: {
-      title: ["L’aéroport vous répond", "À voix haute"],
-      subtitle: "Un accueil vocal trilingue pour vous guider, simplement.",
+      title: ["Votre aéroport", "Une voix qui guide", "votre voyage"],
+      subtitle: "Demandez des informations sur votre vol, vos bagages ou les services de l’aéroport. Parlez simplement. Nous vous aidons à trouver votre chemin.",
       test: "Tester le voicebot",
-      how: "Comment ça marche",
+      how: "Découvrir comment ça marche",
       greeting: "Bonjour, welkom, hello.",
+      ready: "Prêt quand vous l’êtes",
+      deviceNote: "Utilise votre microphone et vos haut-parleurs",
       greetingAria: "Le voicebot accueille en français, néerlandais et anglais",
       featuresAria: "Caractéristiques principales",
       features: [
         ["Trois langues", "Français · Nederlands · English"],
         ["Des réponses claires", "Des informations utiles à votre voyage"],
-        ["À votre écoute", "Posez simplement votre question"],
+        ["À votre écoute", "Parlez naturellement, à votre rythme"],
       ],
     },
     questions: {
@@ -287,41 +293,40 @@ export default function HomePage() {
 
       <main id="contenu">
         <div className="hero-stage">
-          <span className="hero-ornament hero-ornament-bottom" aria-hidden="true" />
-          <span className="hero-stage-dots" aria-hidden="true" />
-
           <section className="hero-full" aria-labelledby="hero-title">
             <div className="hero-photo" aria-hidden="true"><img src={publicAsset("airplane-wing-river.webp")} alt="" /></div>
             <div className="hero-shade" aria-hidden="true" />
-            <div className="hero-grid-lines" aria-hidden="true" />
 
             <div className="hero-content">
-              <div className="hero-copy">
-                <h1 id="hero-title">
-                  {content.hero.title.map((line) => <span className="hero-line" key={line}><span>{line}</span></span>)}
-                </h1>
-                <p>{content.hero.subtitle}</p>
-                <div className="hero-actions">
-                  <VoicebotTrigger className="button button-primary" initialLanguage={language}>
+              <div className="hero-main-grid">
+                <div className="hero-copy">
+                  <span className="hero-brandline">ZAVENTEM VOICE</span>
+                  <h1 id="hero-title">
+                    {content.hero.title.map((line) => <span className="hero-line" key={line}><span>{line}</span></span>)}
+                  </h1>
+                  <p>{content.hero.subtitle}</p>
+                  <a className="hero-how-link" href="#usages">{content.hero.how}<span aria-hidden="true">↓</span></a>
+                </div>
+
+                <aside className="hero-voice-panel" aria-label={content.hero.greetingAria}>
+                  <p className="hero-panel-status"><i aria-hidden="true" />{content.hero.ready}</p>
+                  <span className="hero-panel-orb" aria-hidden="true"><i /></span>
+                  <h2 className="hero-panel-greeting">{content.hero.greeting}</h2>
+                  <span className="hero-panel-wave" aria-hidden="true">
+                    {[14, 27, 19, 37, 48, 58, 45, 26, 37, 17, 29, 14].map((height, index) => <i style={{ height }} key={`${height}-${index}`} />)}
+                  </span>
+                  <VoicebotTrigger className="button button-primary hero-panel-button" initialLanguage={language}>
                     <IconSprite col={1} row={1} label="" className="hero-button-icon" />
                     {content.hero.test}
                   </VoicebotTrigger>
-                  <a className="button button-glass" href="#controle">{content.hero.how}</a>
-                </div>
-              </div>
-
-              <div className="hero-greeting" aria-label={content.hero.greetingAria}>
-                <IconSprite col={1} row={1} label="" className="hero-greeting-icon" />
-                <span className="hero-greeting-wave" aria-hidden="true">
-                  {[12, 23, 17, 30, 38, 25, 17, 27, 14].map((height, index) => <i style={{ height }} key={`${height}-${index}`} />)}
-                </span>
-                <strong>{content.hero.greeting}</strong>
+                  <small>{content.hero.deviceNote}</small>
+                </aside>
               </div>
 
               <div className="hero-meta" aria-label={content.hero.featuresAria}>
                 {content.hero.features.map(([title, text], index) => {
                   const icons = [{ col: 8, row: 1 }, { col: 5, row: 6 }, { col: 2, row: 1 }];
-                  return <article key={title}><IconSprite {...icons[index]} label="" className="hero-feature-icon" /><div><strong>{title}</strong><span>{text}</span><i /></div></article>;
+                  return <article key={title}><IconSprite {...icons[index]} label="" className="hero-feature-icon" /><div><strong>{title}</strong><span>{text}</span></div></article>;
                 })}
               </div>
             </div>
