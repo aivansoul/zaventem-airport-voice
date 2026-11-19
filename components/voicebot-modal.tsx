@@ -137,7 +137,7 @@ function VoicebotDialog({ initialLanguage, onClose }: {
     onClose();
   }, [endSession, onClose]);
 
-  function start() {
+  async function start() {
     if (!configured || !consent || connecting || connected) return;
     setError("");
     setHadConnected(false);
@@ -149,9 +149,9 @@ function VoicebotDialog({ initialLanguage, onClose }: {
     }
 
     try {
-      startSession({
+      await startSession({
         agentId: PUBLIC_AGENT_ID,
-        connectionType: "websocket",
+        connectionType: "webrtc",
         overrides: { agent: { language } },
         onConnect: () => setError(""),
         onError: (message) => setError(formatSessionError(message)),

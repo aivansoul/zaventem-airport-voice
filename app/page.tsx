@@ -266,7 +266,7 @@ export default function HomePage() {
             <SectionRail current="04" />
             <div className="section-head section-head-light reveal">
               <h2 data-scroll-title>HUMAIN DANS<br />LA VOIX.</h2>
-              <p>La personnalité a été pensée comme un bon agent d’accueil: adulte, attentive, vive sans être pressée, capable de parler normalement et de savoir quand passer la main.</p>
+              <p>La personnalité vocale a été pensée comme celle d’un agent d’accueil expérimenté : une voix masculine de 42 à 55 ans, bienveillante et énergique, vive sans être pressée, jamais sportive, publicitaire ou théâtrale.</p>
             </div>
             <div className="voice-layout">
               <div className="voice-qualities">

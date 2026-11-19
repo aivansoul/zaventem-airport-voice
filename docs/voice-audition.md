@@ -2,17 +2,19 @@
 
 ## But
 
-Valider une voix réellement humaine avant de déclarer l’agent prêt : adulte de 42 à 55 ans, chaleureuse, énergique sans tonalité sportive, publicitaire ou théâtrale. Les métadonnées ElevenLabs ne suffisent pas ; la décision finale se prend sur de l’audio généré puis sur une conversation réelle.
+Valider des voix masculines réellement humaines avant de déclarer l’agent prêt : homme de 42 à 55 ans, bienveillant, chaleureux et énergique sans tonalité sportive, publicitaire ou théâtrale. Les métadonnées ElevenLabs ne suffisent pas ; la décision finale se prend sur de l’audio généré puis sur une conversation réelle.
 
 ## Candidats retenus
 
 | Langue | Voix | Voice ID | Pourquoi elle entre en audition |
 |---|---|---|---|
-| Français | Koraly — Virtual Assistant | `gidGFDFyCSnGFnZ9hK7l` | Nuancée, conversationnelle, sourire et énergie modulables. |
-| Néerlandais | Jennifer — Pleasant Dutch | `D6MRWCKoavI2xUJXmaCb` | Mature, agréable et calme. Vérifier en priorité que le rendu sonne naturel pour un public belge. |
-| Anglais | Savvy — Warm, Grounded & Natural | `ogwqBH5bbF03DSbNiRNN` | Chaleureuse, posée et directe sans voix d’annonce. |
+| Français | Léo — French Pro Voice Artist | `AfbuxQ9DVtS4azaxN1W7` | Homme d’âge moyen, timbre léger, chaleureux et engageant. |
+| Néerlandais | Jeroen Vlaams | `Yv0oyZ3obP9foTH7emqG` | Homme d’âge moyen, flamand belge natif, chaleureux, clair et rassurant. |
+| Anglais | Mark — Expressive General British English | `jgzHfSd2o0L7p0de3yr0` | Homme d’âge moyen, chaleureux, amical et expressif sans voix d’annonce. |
 
-Réglages communs : `eleven_v3_conversational`, stabilité `0.45`, similarité `0.75`, vitesse `1.00`, style `0`. Ne pas augmenter le style pour « donner de l’énergie » : l’énergie doit venir du rythme, du choix des mots et de la voix, pas d’une pose publicitaire.
+Mode de production : `eleven_realtime_v1_mini`. La configuration Custom de repli utilise `eleven_v4_turbo`, stabilité `0.45`, similarité `0.75` et style `0`. Le contrôle de vitesse n’est pas appliqué par Eleven v4 Turbo. L’énergie doit venir du rythme, du choix des mots et de la voix, pas d’une pose publicitaire.
+
+SLA de réactivité : `convai_ttf_audio_since_silence` inférieur ou égal à `850 ms` pour chaque tour parlé après la fin de parole de l’utilisateur. La mesure doit provenir des métriques de la conversation live, pas d’un chronomètre autour d’une requête texte.
 
 ## Textes d’audition
 
@@ -43,7 +45,7 @@ Faire aussi lire, dans chaque langue, une consigne courte avec un numéro de té
 
 | Critère | FR | NL | EN | Seuil |
 |---|---:|---:|---:|---:|
-| Âge perçu 42–55 |  |  |  | 4/5 |
+| Homme, âge perçu 42–55 |  |  |  | 4/5 |
 | Humanité / spontanéité |  |  |  | 4/5 |
 | Chaleur sans surjeu |  |  |  | 4/5 |
 | Énergie contenue |  |  |  | 4/5 |

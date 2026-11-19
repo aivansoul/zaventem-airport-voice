@@ -15,7 +15,9 @@
     "check": "npm test && npm run build",
     "agent:create": "node scripts/create-elevenlabs-agent.mjs",
     "agent:sync": "node scripts/sync-elevenlabs-agent.mjs",
-    "agent:verify": "node scripts/verify-elevenlabs-agent.mjs"
+    "agent:verify": "node scripts/verify-elevenlabs-agent.mjs",
+    "agent:validate-live": "node scripts/validate-live-agent.mjs",
+    "agent:benchmark-audio": "node scripts/benchmark-live-audio.mjs"
   },
   "dependencies": {
     "@elevenlabs/react": "1.23.1",
@@ -31,4 +33,3 @@
     "typescript": "5.9.3"
   }
 }
-

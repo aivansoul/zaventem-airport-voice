@@ -1,8 +1,9 @@
 {
   "schema_version": 1,
   "intent": {
+    "gender": "male",
     "age_range": "42–55",
-    "human_impression": "Une personne d’accueil expérimentée, présente et réellement attentive.",
+    "human_impression": "Un homme d’accueil expérimenté, présent et réellement attentif.",
     "energy": "Énergique mais contenue : éveillée, souriante, jamais sportive ni publicitaire.",
     "pace": "Naturel et alerte, avec de micro-pauses aux endroits utiles.",
     "warmth": "Chaleureuse sans surjouer l’empathie.",
@@ -16,7 +17,8 @@
       "rires, soupirs, chuchotements ou balises émotionnelles générées"
     ]
   },
-  "model": "eleven_v3_conversational",
+  "model": "eleven_v4_turbo",
+  "realtime_model": "eleven_realtime_v1_mini",
   "settings": {
     "stability": 0.45,
     "similarity_boost": 0.75,
@@ -28,19 +30,19 @@
   },
   "candidates": {
     "fr": {
-      "voice_id": "gidGFDFyCSnGFnZ9hK7l",
-      "name": "Koraly — Virtual Assistant",
-      "target": "Français naturel, nuancé, chaleureux et réactif."
+      "voice_id": "AfbuxQ9DVtS4azaxN1W7",
+      "name": "Léo — French Pro Voice Artist",
+      "target": "Homme d’âge moyen, français naturel, léger, chaleureux et engageant."
     },
     "nl": {
-      "voice_id": "D6MRWCKoavI2xUJXmaCb",
-      "name": "Jennifer — Pleasant Dutch",
-      "target": "Néerlandais mûr, agréable et conversationnel."
+      "voice_id": "Yv0oyZ3obP9foTH7emqG",
+      "name": "Jeroen Vlaams",
+      "target": "Homme d’âge moyen, flamand belge natif, chaleureux, clair et rassurant."
     },
     "en": {
-      "voice_id": "ogwqBH5bbF03DSbNiRNN",
-      "name": "Savvy — Warm, Grounded & Natural",
-      "target": "Anglais posé, authentique et accessible."
+      "voice_id": "jgzHfSd2o0L7p0de3yr0",
+      "name": "Mark — Expressive General British English",
+      "target": "Homme d’âge moyen, anglais chaleureux, amical, expressif et assuré."
     }
   },
   "audition_texts": {
@@ -49,7 +51,7 @@
     "en": "Welcome to Brussels Airport. How can I help you? Your gate can change until the last moment, so please check the airport screens and app before moving on."
   },
   "acceptance_criteria": [
-    "On entend une personne de 42 à 55 ans, pas une voix adolescente.",
+    "On entend un homme de 42 à 55 ans, pas une voix adolescente.",
     "L’énergie reste accueillante et maîtrisée, même sur une consigne urgente.",
     "Les trois langues ont une personnalité cohérente sans imiter le même timbre.",
     "Aucune pose robotique, mélodie répétitive ou cadence de publicité n’est perceptible.",

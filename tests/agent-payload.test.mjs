@@ -36,12 +36,29 @@ test("the three language presets use the approved voices and settings", () => {
   assert.equal(project.config.tts_settings.style, 0);
   for (const language of ["fr", "nl", "en"]) {
     const tts = conversation.language_presets[language].overrides.tts;
+    assert.equal(project.config.voices[language].gender, "male");
+    assert.equal(project.config.voices[language].age, "middle_aged");
     assert.equal(tts.voice_id, project.config.voices[language].id);
-    assert.equal(tts.model_id, "eleven_v3_conversational");
+    assert.equal(tts.model_id, "eleven_v4_turbo");
     assert.equal(tts.stability, 0.45);
     assert.equal(tts.similarity_boost, 0.75);
     assert.equal(tts.speed, 1);
   }
+});
+
+test("the agent uses the low-latency realtime model and an 850 ms hard SLA", () => {
+  assert.equal(conversation.realtime_model, "eleven_realtime_v1_mini");
+  assert.equal(project.config.voice_persona.gender, "male");
+  assert.equal(project.config.voice_persona.age_range, "42-55");
+  assert.equal(project.config.latency_sla.metric, "convai_ttf_audio_since_silence");
+  assert.equal(project.config.latency_sla.maximum_ms, 850);
+  assert.equal(project.config.latency_sla.scope, "public_preselected_language_audio_turns");
+  assert.equal(conversation.turn.turn_model, "turn_v3");
+  assert.equal(conversation.turn.turn_eagerness, "eager");
+  assert.equal(conversation.turn.spelling_patience, "auto");
+  assert.equal(conversation.turn.speculative_turn, true);
+  assert.equal(prompt.max_tokens, 120);
+  assert.equal(prompt.rag.max_retrieved_rag_chunks_count, 2);
 });
 
 test("the public modal may select a supported language at session start", () => {

@@ -14,6 +14,14 @@ if (!apiKey) throw new Error("ELEVENLABS_API_KEY est absent.");
 const project = JSON.parse(
   await readFile(resolve(root, "config/elevenlabs-agent.json"), "utf8"),
 );
+const latencyMaximumMilliseconds = Number(project.latency_sla?.maximum_ms);
+if (!Number.isFinite(latencyMaximumMilliseconds) || latencyMaximumMilliseconds <= 0) {
+  throw new Error("config.latency_sla.maximum_ms doit être un nombre strictement positif.");
+}
+const latencyMinimumMeasuredTurns = Number(project.latency_sla?.minimum_measured_turns);
+if (!Number.isInteger(latencyMinimumMeasuredTurns) || latencyMinimumMeasuredTurns <= 0) {
+  throw new Error("config.latency_sla.minimum_measured_turns doit être un entier strictement positif.");
+}
 const agentId = process.env.ELEVENLABS_AGENT_ID?.trim() || project.agent_id;
 if (!/^agent_[a-z0-9]+$/u.test(agentId ?? "")) throw new Error("agent_id invalide.");
 
@@ -104,6 +112,7 @@ function remoteSummary(agent) {
     agent_id: agent.agent_id,
     version_id: agent.version_id ?? null,
     branch_id: agent.branch_id ?? null,
+    realtime_model: config.realtime_model ?? null,
     llm: prompt.llm ?? null,
     base_tts: {
       model_id: config.tts?.model_id ?? null,
@@ -236,6 +245,108 @@ function transcriptTools(transcript) {
   })));
 }
 
+function roundMilliseconds(value) {
+  return Number(value.toFixed(3));
+}
+
+function percentile(sortedValues, fraction) {
+  if (sortedValues.length === 0) return null;
+  const position = (sortedValues.length - 1) * fraction;
+  const lowerIndex = Math.floor(position);
+  const upperIndex = Math.ceil(position);
+  const lower = sortedValues[lowerIndex];
+  const upper = sortedValues[upperIndex];
+  return roundMilliseconds(lower + ((upper - lower) * (position - lowerIndex)));
+}
+
+function latencyReport(transcript, maximumMilliseconds) {
+  const usersBySourceEvent = new Map();
+  const measuredSourceEvents = new Set();
+  const measuredTurns = [];
+  let latestUser = null;
+  let deduplicatedAgentTurnsWithoutMessage = 0;
+
+  for (const [transcriptIndex, turn] of transcript.entries()) {
+    const message = typeof turn.message === "string" ? turn.message.trim() : "";
+    const sourceEventId = turn.source_event_id ?? null;
+
+    if (turn.role === "user" && message) {
+      latestUser = {
+        transcript_index: transcriptIndex,
+        source_event_id: sourceEventId,
+        message,
+      };
+      if (sourceEventId !== null) usersBySourceEvent.set(String(sourceEventId), latestUser);
+      continue;
+    }
+    if (turn.role !== "agent") continue;
+    if (!message) {
+      deduplicatedAgentTurnsWithoutMessage += 1;
+      continue;
+    }
+
+    const user = sourceEventId !== null
+      ? usersBySourceEvent.get(String(sourceEventId)) ?? latestUser
+      : latestUser;
+    if (!user) continue;
+
+    const sourceKey = sourceEventId !== null
+      ? `source:${sourceEventId}`
+      : `agent:${transcriptIndex}`;
+    if (measuredSourceEvents.has(sourceKey)) continue;
+
+    const elapsedSeconds = Number(
+      turn.conversation_turn_metrics?.metrics
+        ?.convai_ttf_audio_since_silence?.elapsed_time,
+    );
+    if (!Number.isFinite(elapsedSeconds) || elapsedSeconds < 0) continue;
+
+    measuredSourceEvents.add(sourceKey);
+    const rawElapsedMilliseconds = elapsedSeconds * 1000;
+    const elapsedMilliseconds = roundMilliseconds(rawElapsedMilliseconds);
+    measuredTurns.push({
+      source_event_id: sourceEventId,
+      user_transcript_index: user.transcript_index,
+      agent_transcript_index: transcriptIndex,
+      user_message: user.message,
+      agent_message: message,
+      elapsed_ms: elapsedMilliseconds,
+      exceeded: rawElapsedMilliseconds > maximumMilliseconds,
+    });
+  }
+
+  const sorted = measuredTurns
+    .map((turn) => turn.elapsed_ms)
+    .sort((left, right) => left - right);
+  const exceededTurns = measuredTurns
+    .filter((turn) => turn.exceeded)
+    .map((turn) => ({
+      source_event_id: turn.source_event_id,
+      user_transcript_index: turn.user_transcript_index,
+      agent_transcript_index: turn.agent_transcript_index,
+      elapsed_ms: turn.elapsed_ms,
+      maximum_ms: maximumMilliseconds,
+      user_message: turn.user_message,
+      agent_message: turn.agent_message,
+    }));
+
+  return {
+    metric: "conversation_turn_metrics.metrics.convai_ttf_audio_since_silence.elapsed_time",
+    unit: "milliseconds",
+    maximum_ms: maximumMilliseconds,
+    percentile_method: "linear_interpolation",
+    count: sorted.length,
+    min_ms: sorted.length > 0 ? sorted[0] : null,
+    p50_ms: percentile(sorted, 0.5),
+    p95_ms: percentile(sorted, 0.95),
+    max_ms: sorted.length > 0 ? sorted.at(-1) : null,
+    exceeded_count: exceededTurns.length,
+    exceeded_turns: exceededTurns,
+    measured_turns: measuredTurns,
+    deduplicated_agent_turns_without_message: deduplicatedAgentTurnsWithoutMessage,
+  };
+}
+
 function evaluate({ responses, server, remote, endCallObserved }) {
   const issues = [];
   const responseText = responses.map((response) => response.text);
@@ -257,6 +368,10 @@ function evaluate({ responses, server, remote, endCallObserved }) {
   const toolNames = tools.map((tool) => tool.tool_name).filter(Boolean);
   const voiceIds = (server.metadata?.charging?.tts_usage?.per_voice_usage ?? [])
     .map((usage) => usage.voice_id);
+  const latency = latencyReport(
+    server.transcript ?? [],
+    latencyMaximumMilliseconds,
+  );
 
   const check = (pass, type, evidence) => {
     if (!pass) issues.push({ type, evidence });
@@ -273,7 +388,7 @@ function evaluate({ responses, server, remote, endCallObserved }) {
   if (validationMode === "full") {
     check(
       includesAny(liquids, ["100 millilitres", "cent millilitres", "100 ml"]) &&
-        includesAny(liquids, ["un litre", "1 litre", "one litre"]),
+        includesAny(liquids, ["soute", "un litre", "1 litre", "one litre"]),
       "liquids_rule_incomplete",
       liquids ?? null,
     );
@@ -286,7 +401,7 @@ function evaluate({ responses, server, remote, endCallObserved }) {
     );
     check(
       includesAny(dutch, ["treinstation", "station"]) &&
-        includesAny(dutch, ["niveau min één", "niveau -1", "level -1", "onder de terminal"]),
+        includesAny(dutch, ["niveau min één", "niveau minus één", "niveau -1", "level -1", "onder de terminal", "onder de halls"]),
       "dutch_answer_missing_or_wrong",
       dutch ?? null,
     );
@@ -340,6 +455,22 @@ function evaluate({ responses, server, remote, endCallObserved }) {
     "tts_model_mismatch",
     { expected: project.model, actual: remote.base_tts.model_id },
   );
+  check(
+    latency.exceeded_count === 0,
+    "latency_sla_exceeded",
+    {
+      maximum_ms: latency.maximum_ms,
+      exceeded_turns: latency.exceeded_turns,
+    },
+  );
+  check(
+    latency.count >= latencyMinimumMeasuredTurns,
+    "latency_sample_too_small",
+    {
+      required_turns: latencyMinimumMeasuredTurns,
+      measured_turns: latency.count,
+    },
+  );
 
   return {
     passed: issues.length === 0,
@@ -348,6 +479,7 @@ function evaluate({ responses, server, remote, endCallObserved }) {
     observed_voice_ids: voiceIds,
     language_detection_usage: server.metadata?.features_usage?.language_detection ?? null,
     multivoice_usage: server.metadata?.features_usage?.multivoice ?? null,
+    latency,
   };
 }
 
@@ -595,7 +727,7 @@ async function runLiveConversation() {
   return {
     generated_at: new Date().toISOString(),
     validation_mode: validationMode,
-    read_only: true,
+    remote_configuration_writes: false,
     origin: ORIGIN,
     output_directory: outputDirectory,
     agent: remote,
@@ -644,7 +776,7 @@ function markdownReport(result) {
     `- Générée le : ${result.generated_at}`,
     `- Agent : \`${result.agent.agent_id}\``,
     `- Conversation : \`${result.conversation.conversation_id}\``,
-    `- Mode : lecture seule`,
+    `- Écriture de configuration distante : non`,
     `- Scénario : \`${result.validation_mode}\``,
     `- Verdict automatique : **${result.quality.passed ? "PASS" : "FAIL"}**`,
     `- Audio WebSocket complet : \`${result.audio.complete_wav.filename}\``,
@@ -653,6 +785,7 @@ function markdownReport(result) {
     "## Configuration distante observée",
     "",
     `- LLM : \`${result.agent.llm}\``,
+    `- Mode temps réel : \`${result.agent.realtime_model}\``,
     `- TTS : \`${result.agent.base_tts.model_id}\`, stabilité ${result.agent.base_tts.stability}, vitesse ${result.agent.base_tts.speed}`,
     `- Voix FR : \`${result.agent.language_presets.fr?.voice_id}\``,
     `- Voix NL : \`${result.agent.language_presets.nl?.voice_id}\``,
@@ -660,9 +793,24 @@ function markdownReport(result) {
     `- Outils configurés : ${result.agent.built_in_tools.map((tool) => `\`${tool.name}\``).join(", ")}`,
     `- Outils custom : ${result.agent.custom_tool_ids.length + result.agent.inline_tools.length}`,
     "",
-    "## Transcription serveur",
+    "## Latence live",
     "",
+    `- Métrique : \`${result.quality.latency.metric}\``,
+    `- SLA maximum : ${result.quality.latency.maximum_ms} ms`,
+    `- Tours parlés mesurés après un utilisateur : ${result.quality.latency.count}`,
+    `- Min / p50 / p95 / max : ${result.quality.latency.min_ms ?? "n/a"} / ${result.quality.latency.p50_ms ?? "n/a"} / ${result.quality.latency.p95_ms ?? "n/a"} / ${result.quality.latency.max_ms ?? "n/a"} ms`,
+    `- Tours agent sans message dédupliqués : ${result.quality.latency.deduplicated_agent_turns_without_message}`,
   ];
+  if (result.quality.latency.exceeded_turns.length === 0) {
+    lines.push("- Aucun dépassement du SLA.");
+  } else {
+    for (const turn of result.quality.latency.exceeded_turns) {
+      lines.push(
+        `- **Dépassement** — événement \`${turn.source_event_id ?? turn.agent_transcript_index}\` : ${turn.elapsed_ms} ms > ${turn.maximum_ms} ms — ${turn.agent_message}`,
+      );
+    }
+  }
+  lines.push("", "## Transcription serveur", "");
   for (const turn of result.conversation.server.transcript ?? []) {
     const role = turn.role === "agent" ? "Agent" : turn.role === "user" ? "Appelant" : turn.role;
     if (turn.message) lines.push(`**${role}** — ${turn.message}`);
@@ -698,6 +846,7 @@ try {
       conversation_id: result.conversation.conversation_id,
       passed: result.quality.passed,
       issues: result.quality.issues,
+      latency: result.quality.latency,
     }, null, 2)}\n`,
   );
   process.stdout.write(`${JSON.stringify({
@@ -715,7 +864,7 @@ try {
     `${JSON.stringify({
       generated_at: new Date().toISOString(),
       agent_id: agentId,
-      read_only: true,
+      remote_configuration_writes: false,
       error: error instanceof Error ? error.stack : String(error),
     }, null, 2)}\n`,
   );

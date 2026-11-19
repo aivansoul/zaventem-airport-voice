@@ -12,6 +12,7 @@ Prototype indépendant d’un voicebot d’accueil trilingue pour les voyageurs 
 - `scripts/create-elevenlabs-agent.mjs` : création protégée, dry-run par défaut.
 - `scripts/sync-elevenlabs-agent.mjs` : sauvegarde `0600`, mise à jour puis relecture.
 - `scripts/verify-elevenlabs-agent.mjs` : comparaison distante en lecture seule.
+- `scripts/benchmark-live-audio.mjs` : benchmark PCM réel, ASR et latence officielle par langue.
 - `tests/` : garde-fous du prompt, du payload et des confirmations CLI.
 
 ## Préparation locale
@@ -74,7 +75,8 @@ npm run agent:verify
 - Le payload envoie `tool_ids: []` et n’envoie jamais `tools` en parallèle.
 - Les seuls outils système actifs sont `language_detection` et `end_call`.
 - Les voix sont distinctes en FR, NL et EN.
-- Le modèle vocal est `eleven_v3_conversational` avec stabilité `0.45`, similarité `0.75`, vitesse `1.00` et style `0`.
+- Le moteur conversationnel est `eleven_realtime_v1_mini` et le modèle vocal est `eleven_v4_turbo`, avec stabilité `0.45`, similarité `0.75`, vitesse `1.00` et style `0`.
+- Le parcours vocal du site utilise WebRTC.
 - Les informations opérationnelles live ne proviennent jamais de la KB mise en cache.
 - L’agent ne peut pas être déclaré prêt sur un simple succès de synchronisation : il faut encore valider le transcript et écouter l’audio réel.
 
@@ -82,9 +84,10 @@ npm run agent:verify
 
 1. `npm test`.
 2. `npm run agent:verify` après toute synchronisation.
-3. Audition selon `docs/voice-audition.md`.
-4. Appels réels FR, NL et EN couvrant bascule de langue, question live, urgence, objet perdu et fin d’appel.
-5. Inspection du transcript distant et écoute de l’audio de chaque scénario.
+3. `npm run agent:benchmark-audio -- --language=fr`, puis `nl` et `en`, avec la clé chargée hors du dépôt.
+4. Audition selon `docs/voice-audition.md`.
+5. Appels réels FR, NL et EN couvrant bascule de langue, question live, urgence, objet perdu et fin d’appel.
+6. Inspection du transcript distant et écoute de l’audio de chaque scénario.
 
 Une validation de configuration prouve uniquement que le serveur contient le payload attendu. Elle ne prouve ni la qualité de la voix, ni le comportement réel du modèle en conversation.
 

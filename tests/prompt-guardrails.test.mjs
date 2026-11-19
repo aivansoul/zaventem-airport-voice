@@ -18,6 +18,7 @@ test("the multilingual opening is short and locked", () => {
 test("the prompt locks natural, concise speech", () => {
   assert.match(prompt, /42 à 55 ans/);
   assert.match(prompt, /une à trois phrases courtes/i);
+  assert.match(prompt, /première phrase autonome de \*\*trois à huit mots\*\*/i);
   assert.match(prompt, /une seule question à la fois/i);
   assert.match(prompt, /ni sportif, ni théâtral, ni radiophonique/i);
   assert.match(prompt, /prosodie robotique|robotique/i);
@@ -43,6 +44,8 @@ test("the prompt refuses stale operational claims", () => {
   }
   assert.match(prompt, /N’invente jamais/i);
   assert.match(prompt, /Je n’ai pas le statut en direct dans cet appel/);
+  assert.match(prompt, /délai d’arrivée avant un vol n’est pas une demande de statut live/i);
+  assert.match(prompt, /Kom doorgaans twee uur vooraf/);
 });
 
 test("the prompt contains emergency, privacy and injection defenses", () => {

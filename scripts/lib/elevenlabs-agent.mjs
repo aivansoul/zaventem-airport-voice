@@ -101,10 +101,20 @@ function validateConfig(config) {
   assertId(config.agent_id, "agent_id", { nullable: true, prefix: "agent_" });
   assertId(config.knowledge_document_id, "knowledge_document_id", { nullable: true });
   if (!isObject(config.voices)) throw new Error("voices_missing");
+  if (
+    !isObject(config.voice_persona) ||
+    config.voice_persona.gender !== "male" ||
+    config.voice_persona.age_range !== "42-55"
+  ) {
+    throw new Error("voice_persona_must_be_male_42_55");
+  }
   for (const language of LANGUAGES) {
     const voice = config.voices[language];
     if (!isObject(voice)) throw new Error(`voice_${language}_missing`);
     assertId(voice.id, `voice_${language}_id`);
+    if (voice.gender !== "male" || voice.age !== "middle_aged") {
+      throw new Error(`voice_${language}_must_be_male_middle_aged`);
+    }
   }
   if (new Set(LANGUAGES.map((language) => config.voices[language].id)).size !== 3) {
     throw new Error("voice_ids_must_be_distinct");
@@ -120,10 +130,22 @@ function validateConfig(config) {
   ) {
     throw new Error("privacy_invalid");
   }
-  if (config.model !== "eleven_v3_conversational") {
-    throw new Error("tts_model_must_be_eleven_v3_conversational");
+  if (config.model !== "eleven_v4_turbo") {
+    throw new Error("tts_model_must_be_eleven_v4_turbo");
+  }
+  if (config.realtime_model !== "eleven_realtime_v1_mini") {
+    throw new Error("realtime_model_must_be_eleven_realtime_v1_mini");
   }
   validateVoiceSettings(config.tts_settings);
+  if (
+    !isObject(config.latency_sla) ||
+    config.latency_sla.metric !== "convai_ttf_audio_since_silence" ||
+    config.latency_sla.maximum_ms !== 850 ||
+    !Number.isInteger(config.latency_sla.minimum_measured_turns) ||
+    config.latency_sla.minimum_measured_turns < 1
+  ) {
+    throw new Error("latency_sla_invalid");
+  }
   if (
     !Array.isArray(config.languages) ||
     !isDeepStrictEqual([...config.languages].sort(), [...LANGUAGES].sort())
@@ -176,6 +198,13 @@ export async function loadProject(configFile = "config/elevenlabs-agent.json") {
     if (voiceDesign.candidates?.[language]?.voice_id !== config.voices[language].id) {
       throw new Error(`voice_design_${language}_does_not_match_config`);
     }
+  }
+  if (
+    voiceDesign.intent?.gender !== config.voice_persona.gender ||
+    voiceDesign.model !== config.model ||
+    voiceDesign.realtime_model !== config.realtime_model
+  ) {
+    throw new Error("voice_design_runtime_mismatch");
   }
 
   return {
@@ -319,6 +348,7 @@ export function buildAgentPayload(project, {
       },
     },
     conversation_config: {
+      realtime_model: config.realtime_model,
       asr: {
         provider: "scribe_realtime",
         quality: "high",
@@ -359,7 +389,7 @@ export function buildAgentPayload(project, {
           prompt: project.prompt,
           llm: config.llm,
           temperature: 0,
-          max_tokens: 180,
+          max_tokens: 120,
           ignore_default_personality: true,
           tool_ids: [],
           built_in_tools: builtInTools(),
@@ -376,8 +406,8 @@ export function buildAgentPayload(project, {
             embedding_model: "e5_mistral_7b_instruct",
             optional_rag_enabled: false,
             max_vector_distance: 0.6,
-            max_documents_length: 18000,
-            max_retrieved_rag_chunks_count: 4,
+            max_documents_length: 12000,
+            max_retrieved_rag_chunks_count: 2,
             include_source_urls: false,
           },
         },
@@ -501,6 +531,7 @@ export function verifyAgentSnapshot(remote, expectedPayload) {
   const expected = expectedPayload.conversation_config;
   const actual = remote?.conversation_config;
   if (!isObject(actual)) throw new Error("remote_conversation_config_missing");
+  assertEqual(actual.realtime_model, expected.realtime_model, "remote_realtime_model");
   assertEqual(remote.name, expectedPayload.name, "remote_agent_name");
   assertEqual(
     remote.platform_settings?.auth?.enable_auth,
@@ -642,6 +673,8 @@ export function publicPlan(project, payload, action) {
       LANGUAGES.map((language) => [language, project.config.voices[language].id]),
     ),
     tts_model: project.config.model,
+    realtime_model: project.config.realtime_model,
+    latency_sla_maximum_ms: project.config.latency_sla.maximum_ms,
     knowledge_characters: project.knowledge.length,
     prompt_characters: project.prompt.length,
     custom_tool_ids: payload.conversation_config.agent.prompt.tool_ids,

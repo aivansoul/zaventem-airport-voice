@@ -17,30 +17,48 @@
     "nl",
     "en"
   ],
+  "voice_persona": {
+    "gender": "male",
+    "age_range": "42-55",
+    "presence": "benevolent, warm and energetic without sounding sporty, theatrical or promotional"
+  },
   "voices": {
     "fr": {
-      "id": "gidGFDFyCSnGFnZ9hK7l",
-      "name": "Koraly - Virtual Assistant",
-      "profile": "middle-aged, ultra-realistic, warm, nuanced and energetic"
+      "id": "AfbuxQ9DVtS4azaxN1W7",
+      "name": "Léo - French Pro Voice Artist",
+      "gender": "male",
+      "age": "middle_aged",
+      "profile": "middle-aged, light, warm, engaging and conversational"
     },
     "nl": {
-      "id": "D6MRWCKoavI2xUJXmaCb",
-      "name": "Jennifer - Pleasant Dutch",
-      "profile": "middle-aged, gentle, mature and conversational"
+      "id": "Yv0oyZ3obP9foTH7emqG",
+      "name": "Jeroen Vlaams",
+      "gender": "male",
+      "age": "middle_aged",
+      "profile": "middle-aged, warm, clear, native Flemish and reassuring"
     },
     "en": {
-      "id": "ogwqBH5bbF03DSbNiRNN",
-      "name": "Savvy - Warm, Grounded & Natural",
-      "profile": "middle-aged, genuine, approachable and conversational"
+      "id": "jgzHfSd2o0L7p0de3yr0",
+      "name": "Mark - Expressive General British English",
+      "gender": "male",
+      "age": "middle_aged",
+      "profile": "middle-aged, warm, friendly, expressive and confidently conversational"
     }
   },
-  "model": "eleven_v3_conversational",
+  "model": "eleven_v4_turbo",
+  "realtime_model": "eleven_realtime_v1_mini",
   "llm": "gpt-4.1-mini",
   "tts_settings": {
     "stability": 0.45,
     "similarity_boost": 0.75,
     "speed": 1,
     "style": 0
+  },
+  "latency_sla": {
+    "metric": "convai_ttf_audio_since_silence",
+    "maximum_ms": 850,
+    "scope": "public_preselected_language_audio_turns",
+    "minimum_measured_turns": 6
   },
   "knowledge_mode": "rag",
   "knowledge_verified_at": "2026-11-19",
