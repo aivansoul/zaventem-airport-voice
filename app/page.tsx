@@ -33,6 +33,7 @@ const copy = {
     nav: { presentation: "Presentation", bananaNavy: "Banana Navy", navigation: "Main navigation", home: "Zaventem Voice, home", openMenu: "Open menu", closeMenu: "Close menu", language: "Page language" },
     hero: {
       title: ["Your airport", "A voice to guide", "your journey"],
+      lead: "",
       subtitle: "Ask about your flight, baggage or airport services. Simply speak. We’ll help you find your way.",
       test: "Try the voicebot",
       how: "Discover how it works",
@@ -68,8 +69,7 @@ const copy = {
       example: "Example conversation",
       question: "Can I pack my power bank in my suitcase?",
       answer: "Keep it with you in your cabin baggage, not in checked baggage. Your airline may also set capacity limits.",
-      input: "Type or speak…",
-      inputAria: "Open the voicebot and ask a question",
+      inputAria: "Open the voicebot microphone",
       qualitiesAria: "Voice qualities",
       qualities: [
         ["Controlled warmth", "A smile you can hear, never theatrical."],
@@ -104,14 +104,15 @@ const copy = {
     final: {
       heading: ["ONE QUESTION", "ONE VOICE", "THE RIGHT DIRECTION"],
       text: "A conversation is still the best test. Ask a simple question, listen to the answer, then challenge the prototype.",
-      button: "Talk to the prototype",
+      button: "Test the voicebot",
     },
   },
   nl: {
     skip: "Ga naar de inhoud",
     nav: { presentation: "Presentatie", bananaNavy: "Banana Navy", navigation: "Hoofdnavigatie", home: "Zaventem Voice, startpagina", openMenu: "Menu openen", closeMenu: "Menu sluiten", language: "Taal van de pagina" },
     hero: {
-      title: ["Uw luchthaven", "Een stem als gids", "op uw reis"],
+      title: ["Uw luchthaven.", "Hulp nodig? Stel uw vraag."],
+      lead: "Onze voicebot helpt u verder.",
       subtitle: "Vraag naar uw vlucht, bagage of de diensten op de luchthaven. Spreek gewoon. Wij helpen u de juiste weg te vinden.",
       test: "Probeer de voicebot",
       how: "Ontdek hoe het werkt",
@@ -147,8 +148,7 @@ const copy = {
       example: "Voorbeeldgesprek",
       question: "Kan ik mijn powerbank meenemen in mijn koffer?",
       answer: "Houd die bij u in uw handbagage, niet in de ruimbagage. Uw luchtvaartmaatschappij kan ook capaciteitslimieten opleggen.",
-      input: "Typ of spreek…",
-      inputAria: "Open de voicebot en stel een vraag",
+      inputAria: "Open de microfoon van de voicebot",
       qualitiesAria: "Stemkwaliteiten",
       qualities: [
         ["Beheerste warmte", "Een hoorbare glimlach, nooit gespeeld."],
@@ -183,7 +183,7 @@ const copy = {
     final: {
       heading: ["ÉÉN VRAAG", "ÉÉN STEM", "DE JUISTE RICHTING"],
       text: "Een gesprek blijft de beste test. Stel een eenvoudige vraag, beluister het antwoord en daag het prototype daarna uit.",
-      button: "Praat met het prototype",
+      button: "Test de voicebot",
     },
   },
   fr: {
@@ -191,6 +191,7 @@ const copy = {
     nav: { presentation: "Présentation", bananaNavy: "Banana Navy", navigation: "Navigation principale", home: "Zaventem Voice, accueil", openMenu: "Ouvrir le menu", closeMenu: "Fermer le menu", language: "Langue de la page" },
     hero: {
       title: ["Votre aéroport", "Une voix qui guide", "votre voyage"],
+      lead: "",
       subtitle: "Demandez des informations sur votre vol, vos bagages ou les services de l’aéroport. Parlez simplement. Nous vous aidons à trouver votre chemin.",
       test: "Tester le voicebot",
       how: "Découvrir comment ça marche",
@@ -226,8 +227,7 @@ const copy = {
       example: "Conversation exemple",
       question: "Je peux prendre ma batterie externe dans ma valise ?",
       answer: "Gardez-la avec vous en cabine, pas en soute. Votre compagnie peut aussi fixer des limites de capacité.",
-      input: "Écrivez ou parlez…",
-      inputAria: "Ouvrir le voicebot et poser une question",
+      inputAria: "Ouvrir le microphone du voicebot",
       qualitiesAria: "Qualités de la voix",
       qualities: [
         ["Chaleur maîtrisée", "Un sourire perceptible, jamais théâtral."],
@@ -262,7 +262,7 @@ const copy = {
     final: {
       heading: ["UNE QUESTION", "UNE VOIX", "LA BONNE DIRECTION"],
       text: "Le meilleur test reste une conversation. Posez une question simple, écoutez la réponse, puis challengez le prototype.",
-      button: "Parler au prototype",
+      button: "Tester le voicebot",
     },
   },
 } as const;
@@ -299,12 +299,13 @@ export default function HomePage() {
 
             <div className="hero-content">
               <div className="hero-main-grid">
-                <div className="hero-copy">
+                <div className={`hero-copy hero-copy-${language}`}>
                   <span className="hero-brandline">ZAVENTEM VOICE</span>
                   <h1 id="hero-title">
                     {content.hero.title.map((line, index) => <span className="hero-line" key={index}><span className="hero-title-fill">{line}</span></span>)}
                   </h1>
-                  <p>{content.hero.subtitle}</p>
+                  {content.hero.lead && <p className="hero-copy-lead">{content.hero.lead}</p>}
+                  <p className={content.hero.lead ? "hero-copy-description" : undefined}>{content.hero.subtitle}</p>
                   <a className="hero-how-link" href="#usages">{content.hero.how}<span aria-hidden="true">↓</span></a>
                 </div>
 
@@ -326,7 +327,7 @@ export default function HomePage() {
               <div className="hero-meta" aria-label={content.hero.featuresAria}>
                 {content.hero.features.map(([title, text], index) => {
                   const icons = [{ col: 8, row: 1 }, { col: 5, row: 6 }, { col: 2, row: 1 }];
-                  return <article key={title}><IconSprite {...icons[index]} label="" className="hero-feature-icon" /><div><strong>{title}</strong><span>{text}</span></div></article>;
+                  return <article key={index}><IconSprite {...icons[index]} label="" className="hero-feature-icon" /><div><strong>{title}</strong><span>{text}</span></div></article>;
                 })}
               </div>
             </div>
@@ -341,7 +342,7 @@ export default function HomePage() {
             </div>
             <div className="usage-bento">
               {content.questions.needs.map(([title, text, note, iconLabel], index) => (
-                <article data-bento className={`usage-card reveal ${needVisuals[index].size}`} key={title}>
+                <article data-bento className={`usage-card reveal ${needVisuals[index].size}`} key={index}>
                   <span className="bento-glow" aria-hidden="true" />
                   <div className="usage-card-top" data-bento-layer>
                     <IconSprite {...needVisuals[index].icon} label={iconLabel} />
@@ -373,14 +374,18 @@ export default function HomePage() {
                 </div>
                 <p className="demo-question">{content.demo.question}</p>
                 <p className="demo-answer">{content.demo.answer}</p>
-                <VoicebotTrigger className="demo-input-trigger" initialLanguage={language} aria-label={content.demo.inputAria}>
-                  <span>{content.demo.input}</span><span className="demo-input-mic" aria-hidden="true"><IconSprite col={1} row={1} label="" className="demo-input-icon" /></span>
+                <VoicebotTrigger
+                  className="demo-input-mic"
+                  initialLanguage={language}
+                  aria-label={content.demo.inputAria}
+                >
+                  <IconSprite col={1} row={1} label="" className="demo-input-icon" />
                 </VoicebotTrigger>
               </div>
             </div>
             <div className="demo-quality-grid reveal" aria-label={content.demo.qualitiesAria}>
               {content.demo.qualities.map(([title, text], index) => (
-                <article key={title}><IconSprite {...demoQualityIcons[index]} label={title} className="demo-quality-icon" /><div><h3>{title}</h3><p>{text}</p><i aria-hidden="true" /></div></article>
+                <article key={index}><IconSprite {...demoQualityIcons[index]} label={title} className="demo-quality-icon" /><div><h3>{title}</h3><p>{text}</p><i aria-hidden="true" /></div></article>
               ))}
             </div>
           </div>
@@ -404,7 +409,7 @@ export default function HomePage() {
               </div>
               <div className="control-layers">
                 {content.control.layers.map(([title, text], index) => (
-                  <article data-scroll-fill-row className={`control-layer control-layer-${(index % 3) + 1} reveal`} key={title}><div><h3>{title}</h3><p>{text}</p></div></article>
+                  <article data-scroll-fill-row className={`control-layer control-layer-${(index % 3) + 1} reveal`} key={index}><div><h3>{title}</h3><p>{text}</p></div></article>
                 ))}
               </div>
             </div>

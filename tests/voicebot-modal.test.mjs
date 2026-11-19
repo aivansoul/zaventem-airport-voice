@@ -7,8 +7,10 @@ const modal = await readFile(
   "utf8",
 );
 
-test("the public voice session uses WebRTC", () => {
-  assert.match(modal, /connectionType:\s*"webrtc"/u);
-  assert.doesNotMatch(modal, /connectionType:\s*"websocket"/u);
+test("the public voice session uses the stable WebSocket transport", () => {
+  assert.match(modal, /connectionType:\s*"websocket"/u);
+  assert.doesNotMatch(modal, /connectionType:\s*"webrtc"/u);
   assert.match(modal, /await startSession\(/u);
+  assert.match(modal, /onDisconnect:\s*\(details\)/u);
+  assert.match(modal, /details\.reason === "error"/u);
 });

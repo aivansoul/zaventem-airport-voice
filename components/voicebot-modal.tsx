@@ -14,11 +14,13 @@ import {
   type ReactNode,
 } from "react";
 import {
+  type DisconnectionDetails,
   useConversationControls,
   useConversationStatus,
 } from "@elevenlabs/react";
 import { PUBLIC_AGENT_ID } from "@/config/public-agent";
 import { IconSprite } from "@/components/icon-sprite";
+import { ZaventemWordmark } from "@/components/zaventem-wordmark";
 
 type VoiceLanguage = "fr" | "nl" | "en";
 
@@ -87,6 +89,11 @@ function formatSessionError(message: string) {
   return process.env.NODE_ENV === "development" ? `${friendlyMessage} (${message})` : friendlyMessage;
 }
 
+function describeDisconnect(details: DisconnectionDetails) {
+  if (details.reason === "error") return details.message;
+  return `Session ended by ${details.reason}`;
+}
+
 function VoicebotDialog({ initialLanguage, onClose }: {
   initialLanguage: VoiceLanguage;
   onClose: () => void;
@@ -94,6 +101,7 @@ function VoicebotDialog({ initialLanguage, onClose }: {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const languageRef = useRef<HTMLButtonElement>(null);
   const endedRef = useRef(false);
+  const receivedAgentReplyRef = useRef(false);
   const { startSession, endSession, sendUserMessage } = useConversationControls();
   const { status, message: sessionError } = useConversationStatus();
   const [language, setLanguage] = useState<VoiceLanguage>(initialLanguage);
@@ -142,6 +150,7 @@ function VoicebotDialog({ initialLanguage, onClose }: {
     setError("");
     setHadConnected(false);
     endedRef.current = false;
+    receivedAgentReplyRef.current = false;
 
     if (!navigator.mediaDevices?.getUserMedia) {
       setError("Ce navigateur ne permet pas d’utiliser le microphone.");
@@ -151,9 +160,18 @@ function VoicebotDialog({ initialLanguage, onClose }: {
     try {
       await startSession({
         agentId: PUBLIC_AGENT_ID,
-        connectionType: "webrtc",
+        connectionType: "websocket",
         overrides: { agent: { language } },
         onConnect: () => setError(""),
+        onMessage: ({ role }) => {
+          if (role === "agent") receivedAgentReplyRef.current = true;
+        },
+        onDisconnect: (details) => {
+          if (endedRef.current) return;
+          if (details.reason === "error" || !receivedAgentReplyRef.current) {
+            setError(formatSessionError(describeDisconnect(details)));
+          }
+        },
         onError: (message) => setError(formatSessionError(message)),
       });
     } catch (cause) {
@@ -194,9 +212,8 @@ function VoicebotDialog({ initialLanguage, onClose }: {
     >
       <div className="voice-modal-panel">
         <div className="voice-modal-topbar">
-          <div className="voice-modal-brand" aria-label="Zaventem Voice">
-            <span aria-hidden="true">Z</span>
-            <strong>Zaventem Voice</strong>
+          <div className="site-wordmark voice-modal-brand" aria-label="Zaventem Voice, by Banana Navy">
+            <ZaventemWordmark />
           </div>
 
           <div className="voice-language-picker" role="group" aria-label="Langue de la conversation">

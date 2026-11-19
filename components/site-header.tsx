@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { VoicebotTrigger } from "@/components/voicebot-modal";
+import { ZaventemWordmark } from "@/components/zaventem-wordmark";
 
 export type SiteLanguage = "en" | "nl" | "fr";
 
@@ -42,9 +43,8 @@ export function SiteHeader({ active, language = "fr", onLanguageChange, homeLabe
   return (
     <header className={`site-header ${active === "home" ? "site-header-home" : ""}`.trim()}>
       <div className="shell header-inner">
-        <Link className="site-wordmark" href="/" aria-label={homeLabels?.home ?? "Zaventem Voice, accueil"}>
-          <span className="wordmark-signal" aria-hidden="true"><i /><i /><i /></span>
-          <span><b>Zaventem Voice</b><small>BY BANANA NAVY</small></span>
+        <Link className="site-wordmark" href="/" aria-label={`${homeLabels?.home ?? "Zaventem Voice, accueil"}, by Banana Navy`}>
+          <ZaventemWordmark />
         </Link>
         <button
           ref={toggleRef}
