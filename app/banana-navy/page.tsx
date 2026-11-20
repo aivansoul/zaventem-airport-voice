@@ -92,7 +92,7 @@ export default function BananaNavyPage() {
               <p>Studio belge d’ingénierie et d’IA, nous construisons des agents vocaux et des systèmes multi-agents, du premier cadrage à la production, au monitoring et à l’amélioration continue.</p>
               <div className="banana-hero-actions">
                 <a className="button banana-button-light" href="tel:+32495277044" aria-label="Contacter Marc-Antoine au +32 495 27 70 44">Contact</a>
-                <a className="banana-inline-link" href="https://banana-navy.ai/fr/" target="_blank" rel="noreferrer">Découvrir Banana Navy <span aria-hidden="true">↗</span></a>
+                <a className="banana-inline-link" href="https://banana-navy.ai/fr/" target="_blank" rel="noreferrer">Découvrir Banana Navy</a>
               </div>
             </div>
           </div>
@@ -186,7 +186,7 @@ export default function BananaNavyPage() {
               <p>Votre communication mérite mieux qu’une réponse plausible.</p>
               <div className="banana-page-cta-actions">
                 <a className="button banana-button-dark" href="tel:+32495277044" aria-label="Appeler Marc-Antoine au +32 495 27 70 44">+32 495 27 70 44</a>
-                <a className="banana-inline-link banana-inline-link-dark" href="https://banana-navy.ai/fr/" target="_blank" rel="noreferrer">Visiter banana-navy.ai <span aria-hidden="true">↗</span></a>
+                <a className="banana-inline-link banana-inline-link-dark" href="https://banana-navy.ai/fr/" target="_blank" rel="noreferrer">Visiter Banana Navy</a>
               </div>
             </div>
           </div>

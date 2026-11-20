@@ -35,7 +35,7 @@ export default function PrivacyPage() {
             <p>Vous pouvez ne pas démarrer la conversation, retirer l’autorisation du microphone dans votre navigateur ou interrompre la session. Pour une demande d’accès ou de suppression liée à ce prototype, contactez Banana Navy à <a href="mailto:marc@banana-navy.com">marc@banana-navy.com</a>.</p>
             <h2>5. Services tiers</h2>
             <p>Le moteur vocal repose sur ElevenLabs. Son utilisation est soumise aux paramètres techniques activés pour l’agent de démonstration et aux politiques du fournisseur. Aucun système opérationnel de Brussels Airport n’est présenté comme connecté à ce prototype.</p>
-            <div className="legal-back"><VoicebotTrigger className="button button-primary">Retour à la démonstration</VoicebotTrigger><Link className="text-link" href="/mentions-legales">Mentions légales <span>→</span></Link></div>
+            <div className="legal-back"><VoicebotTrigger className="button button-primary">Retour à la démonstration</VoicebotTrigger><Link className="text-link" href="/mentions-legales">Mentions légales</Link></div>
           </article>
         </div></section>
       </main>

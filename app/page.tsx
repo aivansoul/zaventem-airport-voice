@@ -306,7 +306,7 @@ export default function HomePage() {
                   </h1>
                   {content.hero.lead && <p className="hero-copy-lead">{content.hero.lead}</p>}
                   <p className={content.hero.lead ? "hero-copy-description" : undefined}>{content.hero.subtitle}</p>
-                  <a className="hero-how-link" href="#usages">{content.hero.how}<span aria-hidden="true">↓</span></a>
+                  <a className="hero-how-link" href="#usages">{content.hero.how}</a>
                 </div>
 
                 <aside className="hero-voice-panel" aria-label={content.hero.greetingAria}>

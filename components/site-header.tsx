@@ -88,7 +88,7 @@ export function SiteHeader({ active, language = "fr", onLanguageChange, homeLabe
               <Link href="/#usages" onClick={() => setOpen(false)}>Usages</Link>
               <Link className={active === "banana-navy" ? "active" : ""} href="/banana-navy" onClick={() => setOpen(false)}>Banana Navy</Link>
               <Link href="/#strike-it" onClick={() => setOpen(false)}>STRIKE IT</Link>
-              <VoicebotTrigger className="nav-cta" onClick={() => setOpen(false)}>DÉMO LIVE <span>↗</span></VoicebotTrigger>
+              <VoicebotTrigger className="nav-cta" onClick={() => setOpen(false)}>DÉMO LIVE</VoicebotTrigger>
             </>
           )}
         </nav>

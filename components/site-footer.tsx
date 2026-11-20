@@ -59,7 +59,7 @@ export function SiteFooter({ language = "fr" }: { language?: SiteLanguage }) {
           <Link href="/banana-navy">Banana Navy</Link>
           <Link href="/confidentialite">{copy.privacy}</Link>
           <Link href="/mentions-legales">{copy.legal}</Link>
-          <a href="https://banana-navy.ai/fr/" target="_blank" rel="noreferrer">banana-navy.ai ↗</a>
+          <a href="https://banana-navy.ai/fr/" target="_blank" rel="noreferrer">banana-navy.ai</a>
         </div>
         <div className="footer-contact">
           <p className="footer-label">LET&apos;S TALK</p>

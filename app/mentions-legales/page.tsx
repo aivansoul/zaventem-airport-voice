@@ -33,7 +33,7 @@ export default function LegalPage() {
             <p>Cette démonstration ne doit pas être utilisée pour prendre une décision opérationnelle, médicale, de sûreté ou de voyage. Pour un vol, un horaire, une porte, un comptoir, un tapis, une urgence ou une règle récente, consultez les canaux officiels et les professionnels compétents.</p>
             <h2>5. Disponibilité</h2>
             <p>Le site et la conversation peuvent être modifiés, suspendus ou indisponibles. La présence d’un bouton de test ne constitue pas une promesse de service permanent.</p>
-            <div className="legal-back"><Link className="button button-primary" href="/">Retour à l’accueil</Link><Link className="text-link" href="/confidentialite">Confidentialité <span>→</span></Link></div>
+            <div className="legal-back"><Link className="button button-primary" href="/">Retour à l’accueil</Link><Link className="text-link" href="/confidentialite">Confidentialité</Link></div>
           </article>
         </div></section>
       </main>
