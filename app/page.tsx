@@ -292,7 +292,7 @@ export default function HomePage() {
       <SiteHeader active="home" language={language} onLanguageChange={changeLanguage} homeLabels={content.nav} />
 
       <main id="contenu">
-        <div className="hero-stage">
+        <div className="hero-stage" id="top">
           <section className="hero-full" aria-labelledby="hero-title">
             <div className="hero-photo" aria-hidden="true"><img src={publicAsset("airplane-wing-river.webp")} alt="" /></div>
             <div className="hero-shade" aria-hidden="true" />

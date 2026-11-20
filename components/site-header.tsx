@@ -51,7 +51,7 @@ export function SiteHeader({ active, language = "fr", onLanguageChange, homeLabe
   return (
     <header className={`site-header ${active === "home" ? "site-header-home" : ""} ${scrolled ? "is-scrolled" : ""}`.trim()}>
       <div className="shell header-inner">
-        <Link className="site-wordmark" href="/" aria-label={`${homeLabels?.home ?? "Zaventem Voice, accueil"}, by Banana Navy`}>
+        <Link className="site-wordmark" href={active === "home" ? "#top" : "/#top"} aria-label={`${homeLabels?.home ?? "Zaventem Voice, accueil"}, by Banana Navy`}>
           <ZaventemWordmark />
         </Link>
         <button
