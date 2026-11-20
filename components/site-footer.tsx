@@ -11,7 +11,6 @@ const footerCopy = {
     legal: "Legal notice",
     strike: "BANANA NAVY VOICE BOT PROJECT",
     strikeNote: "Selection for Belgian Defence’s STRIKE IT 2026 programme and support from the Cyber Defence Factory / Cyber Command apply only to the Banana Navy project. This context is separate from the Brussels Airport concept presented here.",
-    bottom: "Independent concept · Not affiliated with Brussels Airport Company",
   },
   nl: {
     brand: "We ontwerpen veilige voice agents en betrouwbare agentic systems, geïntegreerd in de bedrijfsvoering en duurzaam onderhouden.",
@@ -22,7 +21,6 @@ const footerCopy = {
     legal: "Juridische informatie",
     strike: "BANANA NAVY VOICE BOT-PROJECT",
     strikeNote: "De selectie voor het STRIKE IT 2026-programma van Belgian Defence en de steun van de Cyber Defence Factory / Cyber Command gelden uitsluitend voor het Banana Navy-project. Deze context staat los van het Brussels Airport-concept dat hier wordt voorgesteld.",
-    bottom: "Onafhankelijk concept · Niet verbonden aan Brussels Airport Company",
   },
   fr: {
     brand: "Nous concevons des agents vocaux sécurisés et des systèmes agentiques fiables, intégrés aux opérations et maintenus dans le temps.",
@@ -33,7 +31,6 @@ const footerCopy = {
     legal: "Mentions légales",
     strike: "PROJET VOICE BOT BANANA NAVY",
     strikeNote: "La sélection au programme Belgian Defence STRIKE IT 2026 et le soutien de la Cyber Defence Factory / Cyber Command concernent uniquement le projet Banana Navy. Ce contexte est distinct du concept Brussels Airport présenté ici.",
-    bottom: "Concept indépendant · Non affilié à Brussels Airport Company",
   },
 } as const;
 
@@ -65,19 +62,24 @@ export function SiteFooter({ language = "fr" }: { language?: SiteLanguage }) {
           <a href="https://banana-navy.ai/fr/" target="_blank" rel="noreferrer">banana-navy.ai ↗</a>
         </div>
         <div className="footer-contact">
-          <p className="footer-label">Let&apos;s Talk</p>
+          <p className="footer-label">LET&apos;S TALK</p>
           <strong>Marc-Antoine</strong>
           <a href="tel:+32495277044">+32 495 27 70 44</a>
           <a href="mailto:marc@banana-navy.com">marc@banana-navy.com</a>
         </div>
       </div>
       <div className="shell footer-strike">
-        <div><span>STRIKE IT 2026</span><strong>{copy.strike}</strong></div>
+        <div className="footer-strike-title"><span>STRIKE IT 2026 · BELGIAN DEFENCE</span><strong>{copy.strike}</strong></div>
+        <div className="footer-strike-logos" role="group" aria-label="STRIKE IT 2026, Belgian Defence, RHID and Belgian Cyber Force">
+          <span><img src={`${basePath}/brand/badge-defence.png`} alt="Belgian Defence" width="220" height="142" loading="lazy" /></span>
+          <span><img src={`${basePath}/brand/badge-crest-royal.png`} alt="RHID" width="112" height="200" loading="lazy" /></span>
+          <span><img src={`${basePath}/brand/badge-strike-it.png`} alt="STRIKE IT" width="823" height="531" loading="lazy" /></span>
+          <span><img src={`${basePath}/brand/badge-cyberforce.png`} alt="Belgian Cyber Force" width="157" height="200" loading="lazy" /></span>
+        </div>
         <p>{copy.strikeNote}</p>
       </div>
       <div className="shell footer-bottom">
         <span>© 2026 Banana Navy</span>
-        <span>{copy.bottom}</span>
       </div>
     </footer>
   );

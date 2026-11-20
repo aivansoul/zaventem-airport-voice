@@ -97,7 +97,7 @@ const copy = {
     strike: {
       lead: "Banana Navy’s Voice Bot project was selected for Belgian Defence’s STRIKE IT 2026 programme and is supported by the Cyber Defence Factory / Cyber Command. It is progressing from prototype to operational capability.",
       body: "The STRIKE IT framework is described as designed, hosted and operated in the European Union to support European requirements for data residency and governance.",
-      guard: "Context note: this selection and support apply only to Banana Navy’s Voice Bot project. They are separate from this independent Brussels Airport concept and do not imply any affiliation with or endorsement by the airport.",
+      guard: "Designed with applicable European requirements in mind: GDPR for personal data, the EU AI Act for transparency, risk and human oversight, DORA for digital operational resilience where relevant, and NIS2 for cybersecurity in essential and important sectors. Data residency, access control, traceability and incident management are validated for each deployment.",
       card: "BANANA NAVY PROJECT ONLY",
       aria: "STRIKE IT programme context for the Banana Navy project",
     },
@@ -176,7 +176,7 @@ const copy = {
     strike: {
       lead: "Het Voice Bot-project van Banana Navy werd geselecteerd voor het STRIKE IT 2026-programma van Belgian Defence en krijgt steun van de Cyber Defence Factory / Cyber Command. Het evolueert van prototype naar operationele capaciteit.",
       body: "Het STRIKE IT-kader wordt omschreven als ontworpen, gehost en beheerd in de Europese Unie om de Europese vereisten voor gegevensresidentie en gegevensgovernance te ondersteunen.",
-      guard: "Contextnota: deze selectie en ondersteuning gelden uitsluitend voor het Voice Bot-project van Banana Navy. Ze staan los van dit onafhankelijke concept voor Brussels Airport en vormen geen band met of goedkeuring door de luchthaven.",
+      guard: "Ontworpen met aandacht voor de toepasselijke Europese vereisten: AVG en GDPR voor persoonsgegevens, de Europese AI Act voor transparantie, risico en menselijk toezicht, DORA voor digitale operationele weerbaarheid waar relevant, en NIS2 voor cyberbeveiliging in essentiële en belangrijke sectoren. Gegevensresidentie, toegangscontrole, traceerbaarheid en incidentbeheer worden per implementatie gevalideerd.",
       card: "UITSLUITEND EEN BANANA NAVY-PROJECT",
       aria: "Context van het STRIKE IT-programma voor het Banana Navy-project",
     },
@@ -255,7 +255,7 @@ const copy = {
     strike: {
       lead: "Le projet Voice Bot de Banana Navy a été sélectionné dans le cadre du programme Belgian Defence STRIKE IT 2026 et bénéficie du soutien de la Cyber Defence Factory / Cyber Command. Il progresse du prototype vers une capacité opérationnelle.",
       body: "Le cadre STRIKE IT est décrit comme conçu, hébergé et opéré dans l’Union européenne afin de soutenir les exigences européennes de résidence et de gouvernance des données.",
-      guard: "Garde-fou de contexte : cette sélection et ces soutiens concernent uniquement le projet Voice Bot de Banana Navy. Ils sont distincts de ce concept indépendant pour Brussels Airport et ne constituent ni affiliation, ni approbation de l’aéroport.",
+      guard: "Conçu en tenant compte des exigences européennes applicables : RGPD pour les données personnelles, AI Act européen pour la transparence, le risque et la supervision humaine, DORA pour la résilience opérationnelle numérique lorsque pertinent, et NIS2 pour la cybersécurité des secteurs essentiels et importants. La résidence des données, les contrôles d’accès, la traçabilité et la gestion des incidents sont validés pour chaque déploiement.",
       card: "PROJET BANANA NAVY UNIQUEMENT",
       aria: "Contexte du programme STRIKE IT pour le projet Banana Navy",
     },
@@ -443,7 +443,7 @@ export default function HomePage() {
           <div className="shell final-cta-inner">
             <div className="final-cta-content reveal">
               <h2>{content.final.heading[0]}<br />{content.final.heading[1]}<br /><span>{content.final.heading[2]}</span></h2>
-              <div><p>{content.final.text}</p><VoicebotTrigger className="button button-white" initialLanguage={language}>{content.final.button}</VoicebotTrigger></div>
+              <div><p>{content.final.text}</p><VoicebotTrigger className="button button-white final-voice-cta" initialLanguage={language}><IconSprite col={1} row={1} label="" className="final-cta-mic-icon" /><span className="final-voice-label">{content.final.button}</span></VoicebotTrigger></div>
             </div>
           </div>
         </section>

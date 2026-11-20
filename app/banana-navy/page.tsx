@@ -87,12 +87,12 @@ export default function BananaNavyPage() {
       <main id="contenu" className="banana-page">
         <section className="banana-hero section-pad">
           <div className="shell banana-hero-grid">
-            <h1><span className="banana-title-line"><span className="banana-title-line-inner banana-rise-line reveal" data-scroll-title="hero">DES VOICEBOTS</span></span><span className="banana-title-line"><span className="banana-title-line-inner banana-title-accent banana-rise-line reveal" data-scroll-title="hero">QUI RESTENT FIABLES</span></span></h1>
+            <h1><span className="banana-title-line"><span className="banana-title-line-inner banana-hero-title-fill banana-rise-line reveal">DES VOICEBOTS</span></span><span className="banana-title-line"><span className="banana-title-line-inner banana-hero-title-fill banana-title-accent banana-rise-line reveal">QUI RESTENT FIABLES</span></span></h1>
             <div className="banana-hero-side reveal">
               <p>Studio belge d’ingénierie et d’IA, nous construisons des agents vocaux et des systèmes multi-agents, du premier cadrage à la production, au monitoring et à l’amélioration continue.</p>
               <div className="banana-hero-actions">
-                <a className="button banana-button-light" href="https://banana-navy.ai/fr/" target="_blank" rel="noreferrer">Découvrir Banana Navy <span aria-hidden="true">↗</span></a>
-                <a className="banana-inline-link" href="tel:+32495277044">Parler à Marc <span aria-hidden="true">→</span></a>
+                <a className="button banana-button-light" href="tel:+32495277044" aria-label="Contacter Marc-Antoine au +32 495 27 70 44">Contact</a>
+                <a className="banana-inline-link" href="https://banana-navy.ai/fr/" target="_blank" rel="noreferrer">Découvrir Banana Navy <span aria-hidden="true">↗</span></a>
               </div>
             </div>
           </div>
